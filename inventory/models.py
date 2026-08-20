@@ -146,9 +146,27 @@ class ProductVariant(models.Model):
     def __str__(self):
         return f"{self.product.name} - {self.size_label}"
 
+    #: Units that represent discrete, countable items — always shown as whole numbers.
+    DISCRETE_UNITS = {"pcs", "box", "pack"}
+
     @property
     def is_low_stock(self):
         return self.quantity_in_stock <= self.reorder_level
+
+    @property
+    def formatted_quantity(self):
+        """Display-friendly stock quantity.
+
+        Pieces/Box/Pack are discrete items, so always shown as a whole
+        number (e.g. '3', not '3.00'). Kg/g/l/ml are weight/volume units,
+        so decimals are kept when present (e.g. '2.5', '0.75') but trimmed
+        of trailing zeros (e.g. '5.00' -> '5').
+        """
+        qty = self.quantity_in_stock
+        if self.unit in self.DISCRETE_UNITS:
+            return str(int(qty))
+        text = f"{qty:.2f}".rstrip("0").rstrip(".")
+        return text if text else "0"
 
     @property
     def expiry_status(self):
