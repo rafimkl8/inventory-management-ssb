@@ -13,6 +13,10 @@ staticfiles/
 media/
 *.log
 
+# Personal data exports (see README "Moving your data to a different computer")
+inventory_backup.json
+*.backup.json
+
 # Env
 .env
 

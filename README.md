@@ -201,7 +201,54 @@ web form.
 
 ---
 
-## 4. Hosting it for free (so you can check it from your phone)
+## 4. Moving your data to a different computer
+
+If you're entering data locally (SQLite) and want to continue on a different
+computer, use Django's built-in export/import — no extra tools needed.
+
+### On the computer that already has your data
+
+```cmd
+cd inventory-management-ssb
+venv\Scripts\activate.bat
+python manage.py dumpdata inventory --indent 2 -o inventory_backup.json
+```
+
+This creates `inventory_backup.json` containing everything — Companies,
+Brands, Categories, Products, Variants, and Stock Movement history.
+
+Move that one file to the other computer however is easiest for you (email,
+Google Drive/OneDrive, USB drive). It is **not** tracked in git — don't
+commit it, since it's your personal shop data, not app code.
+
+### On the other computer
+
+Set up the project as normal first (clone the repo, create the venv, install
+requirements, run `migrate` — see sections 1–2 above), **then** load the
+backup instead of starting from an empty database:
+
+```cmd
+cd inventory-management-ssb
+venv\Scripts\activate.bat
+python manage.py migrate
+python manage.py loaddata inventory_backup.json
+```
+
+All your products, brands, companies, and stock levels will now exist on the
+second computer exactly as they were when you ran `dumpdata`.
+
+> **Note:** this is a one-way snapshot, not two-way sync. If you add more
+> data on Computer A *after* taking the backup, and separately add different
+> data on Computer B, loading one backup into the other will not merge them
+> — it overwrites matching records by ID. Pick one computer as your "main"
+> one for daily entry, or repeat the dump/load steps each time before
+> switching. If this becomes a hassle, hosting it online (see the next
+> section) removes the problem entirely, since every computer/phone would
+> then share the same live database.
+
+---
+
+## 5. Hosting it for free (so you can check it from your phone)
 
 Recommended combo: **Render** (free web hosting) + **Neon** (free PostgreSQL).
 Neon's free tier has no time limit and is enough for a small personal shop
