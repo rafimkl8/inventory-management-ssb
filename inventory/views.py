@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from .forms import ProductForm, ProductVariantForm, StockMovementForm
-from .models import Brand, Category, Product, ProductVariant, StockMovement
+from .models import Brand, Category, Company, Product, ProductVariant, StockMovement
 
 VariantFormSet = inlineformset_factory(
     Product,
@@ -20,7 +20,8 @@ VariantFormSet = inlineformset_factory(
 
 
 def _apply_common_filters(qs, request):
-    """Apply category/brand/country/unit/search filters shared by list views."""
+    """Apply company/category/brand/country/unit/search filters shared by list views."""
+    company = request.GET.get("company")
     category = request.GET.get("category")
     brand = request.GET.get("brand")
     country = request.GET.get("country")
@@ -28,6 +29,8 @@ def _apply_common_filters(qs, request):
     search = request.GET.get("q")
     low_stock = request.GET.get("low_stock")
 
+    if company:
+        qs = qs.filter(product__brand__company_id=company)
     if category:
         qs = qs.filter(product__category_id=category)
     if brand:
@@ -45,13 +48,15 @@ def _apply_common_filters(qs, request):
 
 def _filter_context(request):
     return {
+        "companies": Company.objects.all(),
         "categories": Category.objects.all(),
-        "brands": Brand.objects.all(),
+        "brands": Brand.objects.select_related("company").all(),
         "countries": Product.objects.order_by().values_list(
             "country_of_origin", flat=True
         ).distinct(),
         "units": ProductVariant.UNIT_CHOICES,
         "selected": {
+            "company": request.GET.get("company", ""),
             "category": request.GET.get("category", ""),
             "brand": request.GET.get("brand", ""),
             "country": request.GET.get("country", ""),
@@ -79,7 +84,9 @@ SORT_MAP = {
 
 def inventory_list(request):
     """Main tab: all variants, with filters and sort."""
-    qs = ProductVariant.objects.select_related("product", "product__brand", "product__category")
+    qs = ProductVariant.objects.select_related(
+        "product", "product__brand", "product__brand__company", "product__category"
+    )
     qs = _apply_common_filters(qs, request)
 
     sort = request.GET.get("sort", "name")
@@ -97,7 +104,9 @@ def expiry_list(request):
 
     Supports a quick range filter: expired / 7 / 30 / 90 / all.
     """
-    qs = ProductVariant.objects.select_related("product", "product__brand", "product__category")
+    qs = ProductVariant.objects.select_related(
+        "product", "product__brand", "product__brand__company", "product__category"
+    )
     qs = qs.filter(expiry_date__isnull=False)
     qs = _apply_common_filters(qs, request)
 

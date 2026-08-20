@@ -18,15 +18,43 @@ class Category(models.Model):
         return self.name
 
 
+class Company(models.Model):
+    """The parent company that owns one or more brands.
+
+    Example: 'L'Oréal' is a Company; 'Garnier' or 'L'Oréal Paris' would be
+    Brands under it. You set this once per Brand, not per product — every
+    product under that brand automatically inherits its company.
+    """
+
+    name = models.CharField(max_length=150, unique=True)
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name_plural = "Companies"
+
+    def __str__(self):
+        return self.name
+
+
 class Brand(models.Model):
-    """Brand of a product, e.g. Al Rehab, Sadia."""
+    """Brand of a product, e.g. Al Rehab, Garnier, Sadia."""
 
     name = models.CharField(max_length=100, unique=True)
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.PROTECT,
+        related_name="brands",
+        null=True,
+        blank=True,
+        help_text="The parent company that owns this brand (optional, but recommended for accurate reporting).",
+    )
 
     class Meta:
         ordering = ["name"]
 
     def __str__(self):
+        if self.company_id:
+            return f"{self.name} ({self.company.name})"
         return self.name
 
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Brand, Category, Product, ProductVariant, StockMovement
+from .models import Brand, Category, Company, Product, ProductVariant, StockMovement
 
 
 @admin.register(Category)
@@ -8,9 +8,16 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ["name"]
 
 
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    search_fields = ["name"]
+
+
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    search_fields = ["name"]
+    list_display = ["name", "company"]
+    list_filter = ["company"]
+    search_fields = ["name", "company__name"]
 
 
 class ProductVariantInline(admin.TabularInline):
@@ -33,11 +40,15 @@ class ProductVariantInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["name", "brand", "category", "country_of_origin", "date_added"]
-    list_filter = ["brand", "category", "country_of_origin"]
-    search_fields = ["name", "brand__name", "category__name"]
+    list_display = ["name", "company_name", "brand", "category", "country_of_origin", "date_added"]
+    list_filter = ["brand__company", "brand", "category", "country_of_origin"]
+    search_fields = ["name", "brand__name", "brand__company__name", "category__name"]
     date_hierarchy = "date_added"
     inlines = [ProductVariantInline]
+
+    @admin.display(description="Company")
+    def company_name(self, obj):
+        return obj.brand.company.name if obj.brand.company_id else "—"
 
 
 @admin.register(ProductVariant)
@@ -49,9 +60,10 @@ class ProductVariantAdmin(admin.ModelAdmin):
         "quantity_in_stock",
         "reorder_level",
         "selling_price",
+        "batch_number",
         "expiry_date",
     ]
-    list_filter = ["unit", "product__brand", "product__category"]
+    list_filter = ["unit", "product__brand__company", "product__brand", "product__category"]
     search_fields = ["product__name", "sku", "batch_number"]
     date_hierarchy = "expiry_date"
 
