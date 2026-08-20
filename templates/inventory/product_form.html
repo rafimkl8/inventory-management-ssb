@@ -22,21 +22,56 @@
 
     <div class="card variant-formset">
         <h3 style="margin-top:0;">Sizes / Weights (e.g. mini 90ml, big 400ml)</h3>
+        <p style="font-size:0.85rem; color:#5b7370; margin-top:-6px;">
+            Each size has its own <strong>Expiry date</strong> field — set it separately per size, since a mini bottle and a big bottle from the same shipment can expire on different dates.
+        </p>
         {{ formset.management_form }}
-        {% for vform in formset %}
-        <div class="variant-row">
-            {{ vform.id }}
-            {% for field in vform.visible_fields %}
-            <p>
-                <label>{{ field.label }}</label>
-                {{ field }}
-            </p>
+        <div id="variant-forms">
+            {% for vform in formset %}
+            <div class="variant-row">
+                {{ vform.id }}
+                {% for field in vform.visible_fields %}
+                <p>
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                </p>
+                {% endfor %}
+            </div>
             {% endfor %}
         </div>
-        {% endfor %}
-        <p style="font-size:0.8rem; color:#777;">Leave a row blank to skip it. Check "Delete" on a row to remove an existing variant.</p>
+        <button type="button" id="add-variant-row" class="btn btn-secondary" style="margin-top:6px;">+ Add another size</button>
+        <p style="font-size:0.8rem; color:#777; margin-top:10px;">Leave a row blank to skip it. Check "Delete" on a row to remove an existing variant.</p>
     </div>
 
     <button type="submit" class="btn">{% if is_edit %}Save Changes{% else %}Add Product{% endif %}</button>
 </form>
+
+<template id="empty-variant-template">
+    <div class="variant-row">
+        {% for field in formset.empty_form.visible_fields %}
+        <p>
+            <label>{{ field.label }}</label>
+            {{ field }}
+        </p>
+        {% endfor %}
+    </div>
+</template>
+
+<script>
+(function () {
+    var addBtn = document.getElementById("add-variant-row");
+    var container = document.getElementById("variant-forms");
+    var totalFormsInput = document.getElementById("id_variants-TOTAL_FORMS");
+    var templateHtml = document.getElementById("empty-variant-template").innerHTML;
+
+    addBtn.addEventListener("click", function () {
+        var formIndex = parseInt(totalFormsInput.value, 10);
+        var newRowHtml = templateHtml.replace(/__prefix__/g, formIndex);
+        var wrapper = document.createElement("div");
+        wrapper.innerHTML = newRowHtml.trim();
+        container.appendChild(wrapper.firstElementChild);
+        totalFormsInput.value = formIndex + 1;
+    });
+})();
+</script>
 {% endblock %}

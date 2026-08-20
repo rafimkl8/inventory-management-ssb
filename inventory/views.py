@@ -14,7 +14,7 @@ VariantFormSet = inlineformset_factory(
     Product,
     ProductVariant,
     form=ProductVariantForm,
-    extra=1,
+    extra=3,
     can_delete=True,
 )
 
