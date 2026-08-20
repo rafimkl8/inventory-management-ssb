@@ -8,8 +8,11 @@
     <a href="?range=" class="{% if not range_filter %}active{% endif %}">All</a>
     <a href="?range=expired" class="{% if range_filter == 'expired' %}active{% endif %}">Expired</a>
     <a href="?range=7" class="{% if range_filter == '7' %}active{% endif %}">Next 7 days</a>
+    <a href="?range=15" class="{% if range_filter == '15' %}active{% endif %}">Next 15 days</a>
     <a href="?range=30" class="{% if range_filter == '30' %}active{% endif %}">Next 30 days</a>
-    <a href="?range=90" class="{% if range_filter == '90' %}active{% endif %}">Next 90 days</a>
+    <a href="?range=90" class="{% if range_filter == '90' %}active{% endif %}">Next 3 months</a>
+    <a href="?range=180" class="{% if range_filter == '180' %}active{% endif %}">Next 6 months</a>
+    <a href="?range=365" class="{% if range_filter == '365' %}active{% endif %}">Next 1 year</a>
 </div>
 
 {% include "inventory/_filter_bar.html" %}

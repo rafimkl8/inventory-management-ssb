@@ -68,6 +68,16 @@ def _filter_context(request):
     }
 
 
+#: Quick range filter options for the Expiry tab: key -> number of days from today.
+EXPIRY_RANGE_DAYS = {
+    "7": 7,
+    "15": 15,
+    "30": 30,
+    "90": 90,    # ~3 months
+    "180": 180,  # ~6 months
+    "365": 365,  # ~1 year
+}
+
 SORT_MAP = {
     "name": "product__name",
     "-name": "-product__name",
@@ -114,8 +124,8 @@ def expiry_list(request):
     range_filter = request.GET.get("range", "")
     if range_filter == "expired":
         qs = qs.filter(expiry_date__lt=today)
-    elif range_filter in {"7", "30", "90"}:
-        days = int(range_filter)
+    elif range_filter in EXPIRY_RANGE_DAYS:
+        days = EXPIRY_RANGE_DAYS[range_filter]
         qs = qs.filter(expiry_date__gte=today, expiry_date__lte=today + timedelta(days=days))
 
     sort = request.GET.get("sort", "expiry")
