@@ -260,14 +260,18 @@ table.inv-table tbody tr:hover {
   background: var(--teal-50);
 }
 
-table.inv-table td a {
+table.inv-table td a:not(.btn) {
   color: var(--teal-700);
   font-weight: 600;
   text-decoration: none;
 }
 
-table.inv-table td a:hover {
+table.inv-table td a:not(.btn):hover {
   text-decoration: underline;
+}
+
+table.inv-table td a.btn {
+  color: #fff;
 }
 
 .badge {
