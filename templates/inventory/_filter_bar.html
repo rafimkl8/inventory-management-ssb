@@ -1,6 +1,13 @@
 <form method="get" class="filter-bar">
     <input type="text" name="q" placeholder="Search product name..." value="{{ selected.q }}">
 
+    <select name="company">
+        <option value="">All companies</option>
+        {% for co in companies %}
+        <option value="{{ co.id }}" {% if selected.company == co.id|stringformat:"s" %}selected{% endif %}>{{ co.name }}</option>
+        {% endfor %}
+    </select>
+
     <select name="category">
         <option value="">All categories</option>
         {% for c in categories %}

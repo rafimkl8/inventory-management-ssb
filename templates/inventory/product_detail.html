@@ -9,6 +9,7 @@
 <div class="card">
     <h2 style="margin-top:0;">{{ product.name }}</h2>
     <p>
+        {% if product.brand.company %}<strong>Company:</strong> {{ product.brand.company.name }} &nbsp;|&nbsp;{% endif %}
         <strong>Brand:</strong> {{ product.brand.name }} &nbsp;|&nbsp;
         <strong>Category:</strong> {{ product.category.name }} &nbsp;|&nbsp;
         <strong>Origin:</strong> {{ product.country_of_origin }} &nbsp;|&nbsp;

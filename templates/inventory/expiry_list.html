@@ -21,6 +21,7 @@
         <tr>
             <th>Product</th>
             <th>Size</th>
+            <th>Company</th>
             <th>Brand</th>
             <th>Origin</th>
             <th>Added</th>
@@ -35,6 +36,7 @@
         <tr>
             <td><a href="{% url 'inventory:product_detail' v.product.id %}">{{ v.product.name }}</a></td>
             <td>{{ v.size_label }} {{ v.get_unit_display }}</td>
+            <td>{{ v.product.brand.company.name|default:"—" }}</td>
             <td>{{ v.product.brand.name }}</td>
             <td>{{ v.product.country_of_origin }}</td>
             <td>{{ v.product.date_added }}</td>
