@@ -72,6 +72,8 @@ SORT_MAP = {
     "-price": "-selling_price",
     "expiry": "expiry_date",
     "-expiry": "-expiry_date",
+    "added": "product__date_added",
+    "-added": "-product__date_added",
 }
 
 

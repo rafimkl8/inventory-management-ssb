@@ -45,6 +45,11 @@ class Product(models.Model):
         default="Saudi Arabia",
         help_text="Country the product is imported/sourced from.",
     )
+    date_added = models.DateField(
+        default=timezone.localdate,
+        verbose_name="Date added",
+        help_text="The date this product was actually added to your inventory. Editable — doesn't have to be today (useful when entering older notebook records).",
+    )
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -78,9 +83,20 @@ class ProductVariant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="variants")
     size_label = models.CharField(
         max_length=50,
-        help_text="e.g. '90ml', '400ml', '500g', '1kg', '1pc'",
+        help_text="Just a descriptive label, e.g. '90ml', '400ml', '500g', '1kg'. It does NOT affect how stock is counted below.",
     )
-    unit = models.CharField(max_length=10, choices=UNIT_CHOICES, default="pcs")
+    unit = models.CharField(
+        max_length=10,
+        choices=UNIT_CHOICES,
+        default="pcs",
+        verbose_name="Stock counted in",
+        help_text=(
+            "How you count stock for THIS item — usually 'Pieces', even for a "
+            "bottled/boxed item labelled '700ml' (you're tracking bottles, not "
+            "raw millilitres). Only choose kg/g/l/ml if you sell loose/bulk "
+            "quantities with no discrete units (e.g. rice sold by weight)."
+        ),
+    )
     sku = models.CharField(max_length=50, blank=True, help_text="Optional internal code.")
     quantity_in_stock = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     reorder_level = models.DecimalField(
