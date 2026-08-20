@@ -1,0 +1,42 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+<div class="top-actions">
+    <a href="{% if is_edit %}{% url 'inventory:product_detail' product.id %}{% else %}{% url 'inventory:inventory_list' %}{% endif %}" class="btn btn-secondary">&larr; Back</a>
+</div>
+
+<h2>{% if is_edit %}Edit Product{% else %}Add New Product{% endif %}</h2>
+
+<form method="post" class="stacked-form">
+    {% csrf_token %}
+
+    <div class="card">
+        <h3 style="margin-top:0;">Product details</h3>
+        {{ form.as_p }}
+        <p style="font-size:0.8rem; color:#777;">
+            Don't see the brand/category you need? Add it quickly in the
+            <a href="/admin/inventory/brand/add/" target="_blank">admin</a> /
+            <a href="/admin/inventory/category/add/" target="_blank">admin</a> first, then come back and refresh.
+        </p>
+    </div>
+
+    <div class="card variant-formset">
+        <h3 style="margin-top:0;">Sizes / Weights (e.g. mini 90ml, big 400ml)</h3>
+        {{ formset.management_form }}
+        {% for vform in formset %}
+        <div class="variant-row">
+            {{ vform.id }}
+            {% for field in vform.visible_fields %}
+            <p>
+                <label>{{ field.label }}</label>
+                {{ field }}
+            </p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <p style="font-size:0.8rem; color:#777;">Leave a row blank to skip it. Check "Delete" on a row to remove an existing variant.</p>
+    </div>
+
+    <button type="submit" class="btn">{% if is_edit %}Save Changes{% else %}Add Product{% endif %}</button>
+</form>
+{% endblock %}
