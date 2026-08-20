@@ -6,9 +6,10 @@ from .models import Brand, Category, Product, ProductVariant, StockMovement
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ["name", "brand", "category", "country_of_origin", "description"]
+        fields = ["name", "brand", "category", "country_of_origin", "date_added", "description"]
         widgets = {
             "description": forms.Textarea(attrs={"rows": 3}),
+            "date_added": forms.DateInput(attrs={"type": "date"}),
         }
 
 

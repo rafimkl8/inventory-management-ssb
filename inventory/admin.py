@@ -33,9 +33,10 @@ class ProductVariantInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["name", "brand", "category", "country_of_origin"]
+    list_display = ["name", "brand", "category", "country_of_origin", "date_added"]
     list_filter = ["brand", "category", "country_of_origin"]
     search_fields = ["name", "brand__name", "category__name"]
+    date_hierarchy = "date_added"
     inlines = [ProductVariantInline]
 
 

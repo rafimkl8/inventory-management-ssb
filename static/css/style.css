@@ -199,13 +199,39 @@ main {
   border-color: var(--teal-600);
 }
 
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(15, 118, 110, 0.08);
+  -webkit-overflow-scrolling: touch;
+  background: #fff;
+}
+
 table.inv-table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
+  min-width: 760px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(15, 118, 110, 0.08);
+}
+
+table.inv-table th.action-col,
+table.inv-table td.action-col {
+  position: sticky;
+  right: 0;
+  background: #fff;
+  box-shadow: -6px 0 6px -6px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+}
+
+table.inv-table th.action-col {
+  background: var(--teal-50);
+}
+
+table.inv-table tbody tr:hover td.action-col {
+  background: var(--teal-50);
 }
 
 table.inv-table th {
