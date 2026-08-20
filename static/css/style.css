@@ -1,11 +1,18 @@
 :root {
-  --green: #1a7f37;
-  --green-dark: #145c29;
-  --red: #c0392b;
-  --orange: #d68910;
-  --gray-bg: #f5f6f8;
-  --border: #dcdfe3;
-  --text: #222;
+  --teal-50: #f0fdfa;
+  --teal-100: #ccfbf1;
+  --teal-200: #99f6e4;
+  --teal-600: #0d9488;
+  --teal-700: #0f766e;
+  --teal-800: #115e59;
+  --red: #dc2626;
+  --red-bg: #fef2f2;
+  --orange: #d97706;
+  --orange-bg: #fffbeb;
+  --gray-bg: #f4f7f7;
+  --border: #d9e5e3;
+  --text: #17302c;
+  --text-muted: #5b7370;
 }
 
 * {
@@ -13,26 +20,34 @@
 }
 
 body {
-  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   margin: 0;
   background: var(--gray-bg);
   color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 header.site-header {
-  background: var(--green);
+  background: linear-gradient(135deg, var(--teal-700), var(--teal-600));
   color: #fff;
-  padding: 14px 20px;
+  padding: 16px 20px;
 }
 
 header.site-header h1 {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 header.site-header .subtitle {
   font-size: 0.85rem;
   opacity: 0.9;
+  font-weight: 400;
 }
 
 nav.tabs {
@@ -44,14 +59,20 @@ nav.tabs {
 nav.tabs a {
   padding: 12px 18px;
   text-decoration: none;
-  color: #555;
+  color: var(--text-muted);
   font-weight: 600;
+  font-size: 0.92rem;
   border-bottom: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+nav.tabs a:hover {
+  color: var(--teal-700);
 }
 
 nav.tabs a.active {
-  color: var(--green);
-  border-bottom-color: var(--green);
+  color: var(--teal-700);
+  border-bottom-color: var(--teal-600);
 }
 
 main {
@@ -74,21 +95,21 @@ main {
 }
 
 .messages li.success {
-  background: #e6f4ea;
-  color: var(--green-dark);
-  border: 1px solid #b7e0c3;
+  background: var(--teal-50);
+  color: var(--teal-800);
+  border: 1px solid var(--teal-200);
 }
 
 .messages li.error {
-  background: #fdecea;
+  background: var(--red-bg);
   color: var(--red);
-  border: 1px solid #f5c6c1;
+  border: 1px solid #fecaca;
 }
 
 .filter-bar {
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 12px;
   margin-bottom: 16px;
   display: flex;
@@ -101,25 +122,47 @@ main {
 .filter-bar input[type="text"] {
   padding: 6px 8px;
   border: 1px solid var(--border);
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 0.85rem;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.filter-bar select:focus,
+.filter-bar input:focus {
+  outline: none;
+  border-color: var(--teal-600);
+  box-shadow: 0 0 0 2px var(--teal-100);
 }
 
 .filter-bar button,
 .btn {
-  background: var(--green);
+  background: var(--teal-600);
   color: #fff;
   border: none;
   padding: 7px 14px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
   text-decoration: none;
   display: inline-block;
+  transition: background 0.15s;
+}
+
+.filter-bar button:hover,
+.btn:hover {
+  background: var(--teal-700);
 }
 
 .btn.btn-secondary {
-  background: #6b7280;
+  background: #64748b;
+}
+
+.btn.btn-secondary:hover {
+  background: #4b5a6e;
 }
 
 .btn.btn-out {
@@ -139,23 +182,39 @@ main {
   background: #fff;
   border: 1px solid var(--border);
   text-decoration: none;
-  color: #444;
+  color: var(--text-muted);
   font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+
+.range-chips a:hover {
+  border-color: var(--teal-600);
+  color: var(--teal-700);
 }
 
 .range-chips a.active {
-  background: var(--green);
+  background: var(--teal-600);
   color: #fff;
-  border-color: var(--green);
+  border-color: var(--teal-600);
 }
 
 table.inv-table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(15, 118, 110, 0.08);
+}
+
+table.inv-table th {
+  background: var(--teal-50);
+  color: var(--teal-800);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 table.inv-table th,
@@ -167,12 +226,22 @@ table.inv-table td {
 }
 
 table.inv-table th a {
-  color: #333;
+  color: var(--teal-800);
   text-decoration: none;
 }
 
 table.inv-table tbody tr:hover {
-  background: #fafafa;
+  background: var(--teal-50);
+}
+
+table.inv-table td a {
+  color: var(--teal-700);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+table.inv-table td a:hover {
+  text-decoration: underline;
 }
 
 .badge {
@@ -184,27 +253,27 @@ table.inv-table tbody tr:hover {
 }
 
 .badge.expired {
-  background: #fdecea;
+  background: var(--red-bg);
   color: var(--red);
 }
 
 .badge.critical {
-  background: #fdecea;
+  background: var(--red-bg);
   color: var(--red);
 }
 
 .badge.warning {
-  background: #fff4e0;
+  background: var(--orange-bg);
   color: var(--orange);
 }
 
 .badge.ok {
-  background: #e6f4ea;
-  color: var(--green-dark);
+  background: var(--teal-50);
+  color: var(--teal-800);
 }
 
 .badge.low-stock {
-  background: #fdecea;
+  background: var(--red-bg);
   color: var(--red);
 }
 
@@ -217,9 +286,10 @@ table.inv-table tbody tr:hover {
 .card {
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 16px;
   margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(15, 118, 110, 0.06);
 }
 
 form.stacked-form p {
@@ -231,6 +301,7 @@ form.stacked-form label {
   font-weight: 600;
   font-size: 0.85rem;
   margin-bottom: 3px;
+  color: var(--text-muted);
 }
 
 form.stacked-form input,
@@ -239,13 +310,23 @@ form.stacked-form textarea {
   width: 100%;
   padding: 7px 9px;
   border: 1px solid var(--border);
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text);
+}
+
+form.stacked-form input:focus,
+form.stacked-form select:focus,
+form.stacked-form textarea:focus {
+  outline: none;
+  border-color: var(--teal-600);
+  box-shadow: 0 0 0 2px var(--teal-100);
 }
 
 .variant-formset .variant-row {
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
   display: grid;
@@ -267,14 +348,15 @@ form.stacked-form textarea {
 .stock-form-inline input {
   padding: 5px 7px;
   border: 1px solid var(--border);
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 0.8rem;
+  font-family: inherit;
 }
 
 .empty-state {
   padding: 40px 20px;
   text-align: center;
-  color: #777;
+  color: var(--text-muted);
 }
 
 .movement-table {
@@ -287,4 +369,9 @@ form.stacked-form textarea {
   padding: 6px 8px;
   border-bottom: 1px solid var(--border);
   text-align: left;
+}
+
+.movement-table th {
+  color: var(--text-muted);
+  font-weight: 600;
 }
