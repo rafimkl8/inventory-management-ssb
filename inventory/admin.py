@@ -1,5 +1,7 @@
+from django import forms
 from django.contrib import admin
 
+from .fields import FlexibleExpiryDateField
 from .models import Brand, Category, Company, Product, ProductVariant, StockMovement
 
 
@@ -20,10 +22,23 @@ class BrandAdmin(admin.ModelAdmin):
     search_fields = ["name", "company__name"]
 
 
+class ProductVariantAdminForm(forms.ModelForm):
+    expiry_date = FlexibleExpiryDateField(
+        required=False,
+        label="Expiry date",
+        help_text="Full date: 21/08/26. Or just month/year: 08/26 (treated as the last day of that month).",
+    )
+
+    class Meta:
+        model = ProductVariant
+        fields = "__all__"
+
+
 class ProductVariantInline(admin.TabularInline):
     """Lets you add all sizes (e.g. 90ml, 400ml) right on the Product page."""
 
     model = ProductVariant
+    form = ProductVariantAdminForm
     extra = 1
     fields = [
         "size_label",
@@ -53,6 +68,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ProductVariant)
 class ProductVariantAdmin(admin.ModelAdmin):
+    form = ProductVariantAdminForm
     list_display = [
         "product",
         "size_label",
