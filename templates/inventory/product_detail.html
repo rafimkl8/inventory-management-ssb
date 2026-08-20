@@ -23,8 +23,8 @@
 <div class="card">
     <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
         <div>
-            <strong>{{ v.size_label }} ({{ v.get_unit_display }})</strong><br>
-            Stock: {{ v.quantity_in_stock }} {{ v.unit }}
+            <strong>{{ v.size_label }}</strong><br>
+            Stock: {{ v.formatted_quantity }} {{ v.get_unit_display }}
             {% if v.is_low_stock %}<span class="badge low-stock">LOW STOCK</span>{% endif %}
             <br>
             Price: {{ v.selling_price }} BDT &nbsp;|&nbsp; Cost: {{ v.cost_price }} BDT
