@@ -4,7 +4,7 @@
 <h2 style="margin-top:0;">Stock In / Stock Out Report</h2>
 <p style="color:#666;margin-top:-8px;">All stock movements for the selected date range and filters.</p>
 
-<form method="get" class="filter-bar">
+<form method="get" class="filter-bar no-print">
     <input type="text" name="q" placeholder="Search product name..." value="{{ selected.q }}">
 
     <select name="company">
@@ -45,6 +45,14 @@
     <a href="." class="btn btn-secondary">Reset</a>
 </form>
 
+<div class="print-header">
+    <h2>Stock In / Stock Out Report</h2>
+    <p>
+        {% if date_from or date_to %}Date range: {{ date_from|default:"…" }} to {{ date_to|default:"…" }}{% else %}All dates{% endif %}
+        &middot; Generated {% now "Y-m-d H:i" %}
+    </p>
+</div>
+
 <div class="summary-cards">
     <div class="summary-card">
         <div class="summary-label">Total Stock In</div>
@@ -61,7 +69,8 @@
 </div>
 
 <div class="top-actions">
-    <a href="?{{ request.GET.urlencode }}&export=csv" class="btn">Download CSV</a>
+    <button type="button" class="btn btn-secondary no-print" onclick="window.print()">🖨 Print</button>
+    <a href="?{{ request.GET.urlencode }}&export=csv" class="btn no-print">Download CSV</a>
 </div>
 
 {% if movements %}

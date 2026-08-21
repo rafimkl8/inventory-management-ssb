@@ -4,7 +4,15 @@
 <h2 style="margin-top:0;">Inventory Report</h2>
 <p style="color:#666;margin-top:-8px;">Current stock and stock value, with the usual filters plus a "date added" range.</p>
 
-{% include "inventory/_filter_bar.html" %}
+<div class="no-print">{% include "inventory/_filter_bar.html" %}</div>
+
+<div class="print-header">
+    <h2>Inventory Report</h2>
+    <p>
+        {% if date_from or date_to %}Date added: {{ date_from|default:"…" }} to {{ date_to|default:"…" }}{% else %}All dates{% endif %}
+        &middot; Generated {% now "Y-m-d H:i" %}
+    </p>
+</div>
 
 <div class="summary-cards">
     <div class="summary-card">
@@ -26,7 +34,8 @@
 </div>
 
 <div class="top-actions">
-    <a href="?{{ request.GET.urlencode }}&export=csv" class="btn">Download CSV</a>
+    <button type="button" class="btn btn-secondary no-print" onclick="window.print()">🖨 Print</button>
+    <a href="?{{ request.GET.urlencode }}&export=csv" class="btn no-print">Download CSV</a>
 </div>
 
 {% if variants %}

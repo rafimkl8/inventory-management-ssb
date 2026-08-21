@@ -491,3 +491,75 @@ form.stacked-form textarea:focus {
   color: var(--text);
   background: #fff;
 }
+
+
+.print-header {
+  display: none;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-header {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .print-header h2 {
+    margin: 0 0 4px;
+    color: var(--text);
+  }
+
+  .print-header p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  main {
+    padding: 0;
+    max-width: none;
+  }
+
+  .summary-cards {
+    break-inside: avoid;
+  }
+
+  .summary-card {
+    box-shadow: none;
+    border: 1px solid #999;
+  }
+
+  .table-wrapper {
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  table.inv-table {
+    min-width: 0;
+  }
+
+  table.inv-table th.action-col,
+  table.inv-table td.action-col {
+    display: none;
+  }
+
+  table.inv-table th,
+  table.inv-table td {
+    border: 1px solid #999;
+  }
+
+  table.inv-table tbody tr {
+    break-inside: avoid;
+  }
+
+  .badge {
+    border: 1px solid currentColor;
+  }
+}

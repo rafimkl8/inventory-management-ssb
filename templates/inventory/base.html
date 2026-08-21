@@ -11,12 +11,12 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header class="site-header">
+    <header class="site-header no-print">
         <h1>Sani Shwapno Bazar</h1>
         <div class="subtitle">Inventory Management</div>
     </header>
 
-    <nav class="tabs">
+    <nav class="tabs no-print">
         <a href="{% url 'inventory:inventory_list' %}" class="{% if active_tab == 'inventory' %}active{% endif %}">Inventory</a>
         <a href="{% url 'inventory:expiry_list' %}" class="{% if active_tab == 'expiry' %}active{% endif %}">Expiry</a>
         <a href="{% url 'inventory:reports_index' %}" class="{% if active_tab == 'reports' %}active{% endif %}">Reports</a>
@@ -25,7 +25,7 @@
 
     <main>
         {% if messages %}
-        <ul class="messages">
+        <ul class="messages no-print">
             {% for message in messages %}
             <li class="{{ message.tags }}">{{ message }}</li>
             {% endfor %}
