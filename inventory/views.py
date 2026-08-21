@@ -1,5 +1,6 @@
 import csv
 from datetime import datetime, timedelta
+from decimal import Decimal
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -143,13 +144,50 @@ def expiry_list(request):
     return render(request, "inventory/expiry_list.html", context)
 
 
+def _size_totals(variants):
+    """Group variants by size_label (e.g. '400ml') and sum their stock.
+
+    A product can have multiple rows for the same size if stock arrived in
+    separate batches with different expiry dates -- this collapses those
+    back into one total per size, so it's easy to see "how many 400ml do I
+    have in total" without adding up each batch row by hand.
+    """
+    totals = {}
+    order = []
+    for v in variants:
+        key = (v.size_label, v.unit)
+        if key not in totals:
+            totals[key] = {
+                "size_label": v.size_label,
+                "unit": v.get_unit_display(),
+                "total_quantity": Decimal("0"),
+                "is_discrete": v.unit in ProductVariant.DISCRETE_UNITS,
+                "batch_count": 0,
+            }
+            order.append(key)
+        totals[key]["total_quantity"] += v.quantity_in_stock
+        totals[key]["batch_count"] += 1
+
+    results = []
+    for key in order:
+        row = totals[key]
+        if row["is_discrete"]:
+            row["formatted_total"] = str(int(row["total_quantity"]))
+        else:
+            text = f"{row['total_quantity']:.2f}".rstrip("0").rstrip(".")
+            row["formatted_total"] = text if text else "0"
+        results.append(row)
+    return results
+
+
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     variants = product.variants.all()
+    size_totals = _size_totals(variants)
     return render(
         request,
         "inventory/product_detail.html",
-        {"product": product, "variants": variants},
+        {"product": product, "variants": variants, "size_totals": size_totals},
     )
 
 

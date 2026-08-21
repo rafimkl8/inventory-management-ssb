@@ -18,6 +18,19 @@
     {% if product.description %}<p>{{ product.description }}</p>{% endif %}
 </div>
 
+{% if size_totals %}
+<h3>Total Stock by Size</h3>
+<p style="color:#666;margin-top:-8px;">Adds up all batches of the same size, so you can see the grand total per size at a glance.</p>
+<div class="summary-cards">
+    {% for row in size_totals %}
+    <div class="summary-card">
+        <div class="summary-label">{{ row.size_label }}{% if row.batch_count > 1 %} &middot; {{ row.batch_count }} batches{% endif %}</div>
+        <div class="summary-value">{{ row.formatted_total }} {{ row.unit }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <h3>Sizes / Variants</h3>
 {% for v in variants %}
 <div class="card">
