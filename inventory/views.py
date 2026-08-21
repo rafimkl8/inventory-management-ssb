@@ -290,6 +290,8 @@ def stock_movement_report(request):
     company = request.GET.get("company")
     category = request.GET.get("category")
     brand = request.GET.get("brand")
+    country = request.GET.get("country")
+    unit = request.GET.get("unit")
     movement_type = request.GET.get("movement_type")
     search = request.GET.get("q")
 
@@ -299,6 +301,10 @@ def stock_movement_report(request):
         qs = qs.filter(variant__product__category_id=category)
     if brand:
         qs = qs.filter(variant__product__brand_id=brand)
+    if country:
+        qs = qs.filter(variant__product__country_of_origin=country)
+    if unit:
+        qs = qs.filter(variant__unit=unit)
     if movement_type in ("in", "out"):
         qs = qs.filter(movement_type=movement_type)
     if search:
@@ -345,6 +351,10 @@ def stock_movement_report(request):
         "companies": Company.objects.all(),
         "categories": Category.objects.all(),
         "brands": Brand.objects.select_related("company").all(),
+        "countries": Product.objects.order_by().values_list(
+            "country_of_origin", flat=True
+        ).distinct(),
+        "units": ProductVariant.UNIT_CHOICES,
         "movements": qs,
         "totals": totals,
         "active_tab": "reports",
@@ -352,6 +362,8 @@ def stock_movement_report(request):
             "company": request.GET.get("company", ""),
             "category": request.GET.get("category", ""),
             "brand": request.GET.get("brand", ""),
+            "country": request.GET.get("country", ""),
+            "unit": request.GET.get("unit", ""),
             "movement_type": request.GET.get("movement_type", ""),
             "q": request.GET.get("q", ""),
         },

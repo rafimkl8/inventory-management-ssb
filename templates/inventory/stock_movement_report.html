@@ -28,6 +28,20 @@
         {% endfor %}
     </select>
 
+    <select name="country">
+        <option value="">All countries</option>
+        {% for country in countries %}
+        <option value="{{ country }}" {% if selected.country == country %}selected{% endif %}>{{ country }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="unit">
+        <option value="">All units</option>
+        {% for value, label in units %}
+        <option value="{{ value }}" {% if selected.unit == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+
     <select name="movement_type">
         <option value="">Stock In &amp; Out</option>
         <option value="in" {% if selected.movement_type == "in" %}selected{% endif %}>Stock In only</option>

@@ -42,8 +42,9 @@ if you're on macOS/Linux or using PowerShell, the commands are slightly differen
     category, brand, country, unit, low-stock, search, and a "date added"
     range.
   - **Stock In / Stock Out Report**: every stock movement within a chosen
-    date range, filterable by company/category/brand/search and movement
-    type (in/out), with totals for Stock In, Stock Out, and Net Change.
+    date range, filterable by company/category/brand/country/unit/search and
+    movement type (in/out), with totals for Stock In, Stock Out, and Net
+    Change.
 - **Django Admin** at `/admin/` — the fastest way to bulk-enter your notebook
   data, since you can add a product and all its size/batch variants on one
   screen.
