@@ -1,4 +1,5 @@
 from datetime import timedelta
+from decimal import Decimal
 
 from django.db import models
 from django.urls import reverse
@@ -167,6 +168,16 @@ class ProductVariant(models.Model):
             return str(int(qty))
         text = f"{qty:.2f}".rstrip("0").rstrip(".")
         return text if text else "0"
+
+    @property
+    def stock_value_cost(self):
+        """Current stock value at cost price (quantity_in_stock * cost_price)."""
+        return (self.quantity_in_stock * self.cost_price).quantize(Decimal("0.01"))
+
+    @property
+    def stock_value_selling(self):
+        """Current stock value at selling price (quantity_in_stock * selling_price)."""
+        return (self.quantity_in_stock * self.selling_price).quantize(Decimal("0.01"))
 
     @property
     def expiry_status(self):

@@ -19,6 +19,7 @@
     <nav class="tabs">
         <a href="{% url 'inventory:inventory_list' %}" class="{% if active_tab == 'inventory' %}active{% endif %}">Inventory</a>
         <a href="{% url 'inventory:expiry_list' %}" class="{% if active_tab == 'expiry' %}active{% endif %}">Expiry</a>
+        <a href="{% url 'inventory:reports_index' %}" class="{% if active_tab == 'reports' %}active{% endif %}">Reports</a>
         <a href="/admin/" target="_blank">Admin (bulk add)</a>
     </nav>
 
