@@ -408,6 +408,19 @@ automatically before retrying setup from scratch, so you generally don't
 need to manually delete anything — just run it again (ideally via the
 terminal the first time, so you can see if it succeeds).
 
+### `start_windows.bat` prints `"... was unexpected at this time."` and stops
+This is a `cmd.exe` batch-file parsing quirk (not a Python or Django issue).
+It happened on an older version of `start_windows.bat` that used multi-line
+`if (...)` blocks — those can desync `cmd.exe`'s parser depending on what
+punctuation appears elsewhere in the file. It's fixed as of the current
+version of the script, which avoids that pattern entirely using `goto`
+labels instead. If you still see this error:
+1. Make sure you have the **latest** `start_windows.bat` from this repo (re-download the ZIP or `git pull` — see [section 0](#0-just-want-to-open-it-in-a-browser-without-typing-commands)).
+2. Make sure the file wasn't re-saved with the wrong line endings by a text
+   editor (it should have Windows-style CRLF line endings, not Unix LF).
+   If you edited the file yourself, re-download a fresh copy instead of
+   fixing it by hand.
+
 ### `AttributeError: 'super' object has no attribute 'dicts'` when opening `/admin/...`
 This means your Python version is **3.14**, which Django 4.2 (used by this
 project) doesn't officially support yet — it's a known Django/Python
