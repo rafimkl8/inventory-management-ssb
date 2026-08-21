@@ -382,6 +382,32 @@ See `.env.example` for the full list of environment variables you can set.
 
 ## Troubleshooting
 
+### The launcher window flashes open and immediately closes, and the app never opens
+This means the setup or startup step hit an error and the window closed
+before you could read it — the window closing is not itself the problem, it's
+just hiding the real error. To see what actually happened:
+
+- **Windows**: open Command Prompt (Windows key → type `cmd` → Enter),
+  `cd` into the project folder, then type `start_windows.bat` and press
+  Enter (instead of double-clicking it). The error will now stay on screen.
+- **macOS/Linux**: open Terminal, `cd` into the project folder, then run
+  `./start_mac_linux.command`.
+
+The two most common causes:
+1. **Python isn't really installed**, even if a `python` command seems to
+   exist (Windows sometimes has a non-functional "Store alias" placeholder).
+   Check with `python --version` — if that doesn't print a version number,
+   install Python from [python.org/downloads](https://www.python.org/downloads/)
+   and check "Add python.exe to PATH" during install.
+2. **No internet connection** during the very first run, which breaks the
+   one-time `pip install` step partway through.
+
+The launcher scripts also self-heal: if a previous attempt left behind a
+broken/incomplete `venv` folder, the next run detects and deletes it
+automatically before retrying setup from scratch, so you generally don't
+need to manually delete anything — just run it again (ideally via the
+terminal the first time, so you can see if it succeeds).
+
 ### `AttributeError: 'super' object has no attribute 'dicts'` when opening `/admin/...`
 This means your Python version is **3.14**, which Django 4.2 (used by this
 project) doesn't officially support yet — it's a known Django/Python

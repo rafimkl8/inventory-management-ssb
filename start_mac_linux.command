@@ -5,32 +5,52 @@
 #  Open the first time, since it's from the internet).
 #  First run: sets up everything automatically (slower, one-time).
 #  Later runs: starts instantly.
+#
+#  If anything goes wrong, this window will stay open and show the
+#  error message instead of closing -- read it before closing.
 # ============================================================
 
 cd "$(dirname "$0")"
 
-if ! command -v python3 >/dev/null 2>&1; then
+fail() {
     echo
-    echo "Python was not found on this computer."
-    echo "Please install Python 3.10-3.13 from https://www.python.org/downloads/"
+    echo "[ERROR] $1"
     echo
     read -p "Press Enter to close..." _
     exit 1
+}
+
+if ! command -v python3 >/dev/null 2>&1; then
+    fail "Python was not found on this computer. Install it from https://www.python.org/downloads/ then double-click this file again."
+fi
+
+# If a previous run partially failed, the venv folder may exist but be
+# broken (missing python inside it). Treat that the same as "missing".
+if [ -d venv ] && [ ! -x venv/bin/python ]; then
+    echo "Found a leftover, incomplete 'venv' folder from a previous attempt -- removing it and starting the one-time setup again."
+    rm -rf venv
 fi
 
 if [ ! -d venv ]; then
     echo "First time setup - this may take a minute, please wait..."
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install -r requirements.txt
-    python manage.py migrate
+    echo
+
+    echo "Creating the virtual environment..."
+    python3 -m venv venv || fail "Failed to create the virtual environment. See the message above for details."
+
+    echo "Installing dependencies (needs an internet connection)..."
+    venv/bin/python -m pip install --disable-pip-version-check -r requirements.txt \
+        || fail "Installing dependencies failed. This usually means there was no internet connection during setup. Check your connection and double-click this file again -- it will retry the failed steps."
+
+    echo "Setting up the database..."
+    venv/bin/python manage.py migrate || fail "Database setup failed. See the message above."
+
     echo
     echo "Setup complete. If this is a brand new database, create an admin"
     echo "login now (you'll be asked for a username and password):"
-    python manage.py createsuperuser
+    venv/bin/python manage.py createsuperuser
 else
-    source venv/bin/activate
-    python manage.py migrate
+    venv/bin/python manage.py migrate || fail "Database setup failed. See the message above."
 fi
 
 echo
@@ -47,4 +67,8 @@ echo
   fi
 ) &
 
-python manage.py runserver 127.0.0.1:8000
+venv/bin/python manage.py runserver 127.0.0.1:8000
+status=$?
+if [ $status -ne 0 ]; then
+    fail "The server exited with an error (see above). Common causes: another program is already using port 8000, or the database needs attention."
+fi
