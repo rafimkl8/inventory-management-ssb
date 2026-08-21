@@ -36,6 +36,15 @@ if you're on macOS/Linux or using PowerShell, the commands are slightly differen
 - **Expiry tab** — same data, sorted nearest-expiry-first, with quick range
   filters: All, Expired, Next 7 days, Next 15 days, Next 30 days, Next 3
   months, Next 6 months, Next 1 year.
+- **Reports tab** — two reports, each with filters and a CSV download button:
+  - **Inventory Report**: current stock levels and stock value (at cost price
+    and at selling price) for every product/variant, filterable by company,
+    category, brand, country, unit, low-stock, search, and a "date added"
+    range.
+  - **Stock In / Stock Out Report**: every stock movement within a chosen
+    date range, filterable by company/category/brand/country/unit/search and
+    movement type (in/out), with totals for Stock In, Stock Out, and Net
+    Change.
 - **Django Admin** at `/admin/` — the fastest way to bulk-enter your notebook
   data, since you can add a product and all its size/batch variants on one
   screen.
@@ -48,11 +57,13 @@ inventory-management-ssb/
 ├── config/                # Django project settings, urls, wsgi
 ├── inventory/             # The app: models, views, forms, admin, urls, custom fields
 │   └── migrations/
-├── templates/inventory/   # HTML templates (base, inventory list, expiry list, forms)
+├── templates/inventory/   # HTML templates (base, inventory/expiry/reports, forms)
 ├── static/css/style.css   # All styling (teal theme, Inter font)
 ├── requirements.txt
 ├── build.sh               # Used by hosting to install deps + migrate + collectstatic
 ├── Procfile               # For Render/Heroku-style hosts
+├── start_windows.bat          # Double-click launcher, no terminal needed (Windows)
+├── start_mac_linux.command    # Double-click launcher, no terminal needed (macOS/Linux)
 └── .env.example           # Template for environment variables
 ```
 
@@ -66,6 +77,67 @@ inventory-management-ssb/
 | `Product` | The general item — name, brand, category, country of origin, date added |
 | `ProductVariant` | The actual stocked unit — size label (e.g. "90ml"), unit, quantity, prices, expiry date, batch number |
 | `StockMovement` | Every stock in/out action, logged with date and note |
+
+---
+
+## 0. Just want to open it in a browser, without typing commands?
+
+If you (or whoever else uses this) don't want to open a terminal, type
+`python manage.py runserver`, etc. every time — there's a **double-click
+launcher** included in this repo for exactly that:
+
+- **Windows**: double-click `start_windows.bat`
+- **macOS / Linux**: double-click `start_mac_linux.command`
+  (macOS: the very first time, right-click it → "Open", since it's a script
+  downloaded from the internet and Gatekeeper blocks a plain double-click by
+  default. After that first "Open", double-clicking works normally.)
+
+What it does, automatically, every time:
+1. Checks Python is installed (tells you where to get it if not).
+2. **First time only**: creates the virtual environment, installs
+   dependencies, runs database migrations, and asks you to create an admin
+   login (username/password) — this is the one-time setup, and takes a
+   minute or two.
+3. **Every time**: starts the server and **opens your default browser** to
+   `http://127.0.0.1:8000/` automatically.
+
+You still need Git and Python installed once per computer (see the note
+below on truly zero-install options), but after that, this is the entire
+day-to-day workflow: **double-click the launcher file, use the app in your
+browser, close the window when you're done.** No VS Code, no terminal, no
+`python manage.py runserver`.
+
+To stop the app: close the server window (Windows) or press `Ctrl+C` in the
+terminal window that opened (macOS/Linux).
+
+### Getting the launcher + latest code onto a new computer
+You still need the project files on that computer once. The simplest way
+without a terminal:
+1. Go to the repo on GitHub: `https://github.com/rafimkl8/inventory-management-ssb`
+2. Click the green **Code** button → **Download ZIP**.
+3. Extract the ZIP anywhere (e.g. Desktop).
+4. Double-click `start_windows.bat` or `start_mac_linux.command` inside the
+   extracted folder, as described above.
+
+This avoids `git clone` entirely, but note it won't auto-update — to get
+future changes you'd download a fresh ZIP (or install Git once and use
+`git pull`, see section 1 below).
+
+### If Python itself isn't installed yet
+This is the one unavoidable one-time install (Django needs Python to run
+locally). Download it from [python.org/downloads](https://www.python.org/downloads/)
+— pick 3.10, 3.11, 3.12, or 3.13 (avoid 3.14, see
+[Troubleshooting](#troubleshooting)). On Windows, tick **"Add python.exe to
+PATH"** during install. After that, the launcher script handles everything
+else.
+
+### Is there a way to skip installing Python entirely?
+Not for running it *locally* on someone else's computer — Django needs a
+Python runtime present. If double-clicking a launcher (even with a one-time
+Python install) is still more than you want on every new computer, the real
+zero-install answer is **hosting it online** (see section 5 below) — then
+any computer or phone just opens a normal `https://` URL in a browser, with
+nothing to install at all, ever.
 
 ---
 
@@ -198,6 +270,9 @@ web form.
 - **Low stock**: check the "Low stock only" filter on the Inventory tab.
 - **Expiry check**: use the Expiry tab, sorted nearest-first by default, with
   the quick range filters (Expired, 7/15/30 days, 3/6 months, 1 year).
+- **Reports**: use the Reports tab for a stock value snapshot (Inventory
+  Report) or a stock in/out history for a date range (Stock In / Stock Out
+  Report). Both have a "Download CSV" button if you want the data in Excel.
 
 ---
 

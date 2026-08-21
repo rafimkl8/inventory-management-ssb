@@ -1,11 +1,15 @@
-from datetime import timedelta
+import csv
+from datetime import datetime, timedelta
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import F
+from django.db.models import Count, DecimalField, F, Q, Sum
+from django.db.models.functions import Coalesce
 from django.forms import inlineformset_factory
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.html import format_html
 
 from .forms import ProductForm, ProductVariantForm, StockMovementForm
 from .models import Brand, Category, Company, Product, ProductVariant, StockMovement
@@ -193,6 +197,180 @@ def product_edit(request, pk):
         "inventory/product_form.html",
         {"form": form, "formset": formset, "is_edit": True, "product": product},
     )
+
+
+def _parse_date(value):
+    """Parse a 'YYYY-MM-DD' string (from an <input type="date">) into a date, or None."""
+    if not value:
+        return None
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").date()
+    except ValueError:
+        return None
+
+
+def reports_index(request):
+    """Landing page linking to the individual reports."""
+    return render(request, "inventory/reports_index.html", {"active_tab": "reports"})
+
+
+def inventory_report(request):
+    """Current stock snapshot: quantities and stock value (cost & selling), with the
+    usual company/brand/category/etc. filters, plus an optional 'date added' range and
+    CSV export.
+    """
+    qs = ProductVariant.objects.select_related(
+        "product", "product__brand", "product__brand__company", "product__category"
+    )
+    qs = _apply_common_filters(qs, request)
+
+    date_from = _parse_date(request.GET.get("date_from"))
+    date_to = _parse_date(request.GET.get("date_to"))
+    if date_from:
+        qs = qs.filter(product__date_added__gte=date_from)
+    if date_to:
+        qs = qs.filter(product__date_added__lte=date_to)
+
+    sort = request.GET.get("sort", "name")
+    order = SORT_MAP.get(sort, "product__name")
+    qs = qs.order_by(order)
+
+    if request.GET.get("export") == "csv":
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = 'attachment; filename="inventory_report.csv"'
+        writer = csv.writer(response)
+        writer.writerow(
+            ["Product", "Size", "Company", "Brand", "Category", "Origin", "Date Added",
+             "Stock Qty", "Unit", "Cost Price", "Selling Price", "Stock Value (Cost)",
+             "Stock Value (Selling)", "Batch Number", "Expiry Date"]
+        )
+        for v in qs:
+            writer.writerow(
+                [v.product.name, v.size_label,
+                 v.product.brand.company.name if v.product.brand.company_id else "",
+                 v.product.brand.name, v.product.category.name, v.product.country_of_origin,
+                 v.product.date_added, v.formatted_quantity, v.unit, v.cost_price,
+                 v.selling_price, v.stock_value_cost, v.stock_value_selling,
+                 v.batch_number, v.expiry_date or ""]
+            )
+        return response
+
+    decimal_field = DecimalField(max_digits=14, decimal_places=2)
+    totals = qs.aggregate(
+        total_cost_value=Coalesce(Sum(F("quantity_in_stock") * F("cost_price")), 0, output_field=decimal_field),
+        total_selling_value=Coalesce(Sum(F("quantity_in_stock") * F("selling_price")), 0, output_field=decimal_field),
+        total_variants=Count("id"),
+    )
+    totals["total_potential_profit"] = totals["total_selling_value"] - totals["total_cost_value"]
+
+    context = _filter_context(request)
+    context["variants"] = qs
+    context["active_tab"] = "reports"
+    context["totals"] = totals
+    context["date_from"] = request.GET.get("date_from", "")
+    context["date_to"] = request.GET.get("date_to", "")
+    context["extra_range_field"] = format_html(
+        '<label class="date-range-field">From (date added)'
+        '<input type="date" name="date_from" value="{}"></label>'
+        '<label class="date-range-field">To (date added)'
+        '<input type="date" name="date_to" value="{}"></label>',
+        context["date_from"],
+        context["date_to"],
+    )
+    return render(request, "inventory/inventory_report.html", context)
+
+
+def stock_movement_report(request):
+    """Stock In / Stock Out report over a date range, with CSV export."""
+    qs = StockMovement.objects.select_related(
+        "variant", "variant__product", "variant__product__brand",
+        "variant__product__brand__company", "variant__product__category",
+    )
+
+    company = request.GET.get("company")
+    category = request.GET.get("category")
+    brand = request.GET.get("brand")
+    country = request.GET.get("country")
+    unit = request.GET.get("unit")
+    movement_type = request.GET.get("movement_type")
+    search = request.GET.get("q")
+
+    if company:
+        qs = qs.filter(variant__product__brand__company_id=company)
+    if category:
+        qs = qs.filter(variant__product__category_id=category)
+    if brand:
+        qs = qs.filter(variant__product__brand_id=brand)
+    if country:
+        qs = qs.filter(variant__product__country_of_origin=country)
+    if unit:
+        qs = qs.filter(variant__unit=unit)
+    if movement_type in ("in", "out"):
+        qs = qs.filter(movement_type=movement_type)
+    if search:
+        qs = qs.filter(variant__product__name__icontains=search)
+
+    date_from = _parse_date(request.GET.get("date_from"))
+    date_to = _parse_date(request.GET.get("date_to"))
+    if date_from:
+        qs = qs.filter(created_at__date__gte=date_from)
+    if date_to:
+        qs = qs.filter(created_at__date__lte=date_to)
+
+    qs = qs.order_by("-created_at")
+
+    if request.GET.get("export") == "csv":
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = 'attachment; filename="stock_movement_report.csv"'
+        writer = csv.writer(response)
+        writer.writerow(
+            ["Date/Time", "Product", "Size", "Company", "Brand", "Movement", "Quantity", "Note"]
+        )
+        for m in qs:
+            writer.writerow(
+                [timezone.localtime(m.created_at).strftime("%Y-%m-%d %H:%M"),
+                 m.variant.product.name, m.variant.size_label,
+                 m.variant.product.brand.company.name if m.variant.product.brand.company_id else "",
+                 m.variant.product.brand.name, m.get_movement_type_display(),
+                 m.quantity, m.note]
+            )
+        return response
+
+    decimal_field = DecimalField(max_digits=14, decimal_places=2)
+    totals = qs.aggregate(
+        total_in=Coalesce(
+            Sum("quantity", filter=Q(movement_type="in")), 0, output_field=decimal_field
+        ),
+        total_out=Coalesce(
+            Sum("quantity", filter=Q(movement_type="out")), 0, output_field=decimal_field
+        ),
+    )
+    totals["net_change"] = totals["total_in"] - totals["total_out"]
+
+    context = {
+        "companies": Company.objects.all(),
+        "categories": Category.objects.all(),
+        "brands": Brand.objects.select_related("company").all(),
+        "countries": Product.objects.order_by().values_list(
+            "country_of_origin", flat=True
+        ).distinct(),
+        "units": ProductVariant.UNIT_CHOICES,
+        "movements": qs,
+        "totals": totals,
+        "active_tab": "reports",
+        "selected": {
+            "company": request.GET.get("company", ""),
+            "category": request.GET.get("category", ""),
+            "brand": request.GET.get("brand", ""),
+            "country": request.GET.get("country", ""),
+            "unit": request.GET.get("unit", ""),
+            "movement_type": request.GET.get("movement_type", ""),
+            "q": request.GET.get("q", ""),
+        },
+        "date_from": request.GET.get("date_from", ""),
+        "date_to": request.GET.get("date_to", ""),
+    }
+    return render(request, "inventory/stock_movement_report.html", context)
 
 
 def stock_action(request, pk):
