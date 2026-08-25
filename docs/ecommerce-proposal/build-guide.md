@@ -1,19 +1,26 @@
-# Build Guide — Sani Shwapno Bazar E-Commerce (Tier A)
+# Build Guide — Sani Swapno Bazar E-Commerce
 
 **For:** you (the developer), building this solo with AI assistance
 **Stack:** Django REST Framework (backend API) + React/Vite (frontend SPA) + PostgreSQL (Supabase or Neon) + Cloudinary (images) + Fly.io or Railway (backend hosting) + Vercel, Netlify, or Cloudflare Pages (frontend hosting)
 
-This stack was chosen specifically because it uses your actual learning stack (Python, Django, React) end-to-end, while still hitting the speed targets discussed (no server "sleep" delays, CDN-served frontend, optimized images).
+This guide has three parts:
+- **Part 1 — Tier A**, full step-by-step build (COD + manually-verified bKash/Nagad).
+- **Part 2 — Tier B**, upgrading Part 1 with an automated payment gateway.
+- **Part 3 — Optional**, fraud-order detection add-on.
+
+Follow Part 1 fully before starting Part 2. Part 3 can be added at any point after Part 1's checkout flow exists.
 
 ---
 
-## 0. Before You Start — Decisions to Lock In
+# PART 1 — TIER A: FULL BUILD INSTRUCTIONS
 
-- **Keep the existing `inventory-management-ssb` app private**, exactly as-is, for the shop owner's stock/expiry/batch tracking. Don't merge it into the new project — the new storefront is a separate system that reads/writes its own `Order` data, and can optionally query the same product data if you connect them to the same database (see Section 1.1).
-- **Repo structure:** a single monorepo is easiest to manage solo:
+## 1.0 Before You Start
+
+- Keep the existing `inventory-management-ssb` app private, exactly as-is, for your stock/expiry/batch tracking. The new storefront is a separate system that reads/writes its own `Order` data, connected to the same database.
+- **Repo structure** (single monorepo, easiest to manage solo):
 
 ```
-sani-shwapno-bazar/
+sani-swapno-bazar/
 ├── backend/                 # Django + DRF project (the API)
 │   ├── config/              # settings, urls, wsgi/asgi
 │   ├── inventory/           # Company, Brand, Category, Product, ProductVariant, StockMovement
@@ -32,26 +39,28 @@ sani-shwapno-bazar/
 └── README.md
 ```
 
-### 0.1 One database or two?
-Simplest path: **one Postgres database, two Django apps inside the same project** — `inventory` (your existing models, kept private/admin-only) and `storefront` (new: `Order`, `OrderItem`). This way product/stock data is always in sync automatically — no duplication, no sync jobs needed.
+- **One database, two Django apps** inside the same project: `inventory` (your existing models, kept private/admin-only) and `storefront` (new: `Order`, `OrderItem`). Product/stock data stays in sync automatically — no duplication, no sync jobs.
 
----
+## 1.1 Backend: Django REST Framework Setup
 
-## 1. Backend: Django REST Framework Setup
-
-### 1.1 Install
+### Step 1 — Install dependencies
 ```bash
-pip install djangorestframework django-cors-headers dj-database-url django-cloudinary-storage cloudinary
+cd backend
+python -m venv venv
+source venv/bin/activate   # venv\Scripts\activate.bat on Windows
+pip install django djangorestframework django-cors-headers dj-database-url python-decouple django-cloudinary-storage cloudinary whitenoise gunicorn
+pip freeze > requirements.txt
 ```
 
-### 1.2 `settings.py` additions
+### Step 2 — `settings.py` additions
 ```python
 INSTALLED_APPS = [
-    # ...existing apps...
+    # ...existing apps (admin, auth, contenttypes, sessions, messages, staticfiles)...
     "rest_framework",
     "corsheaders",
     "cloudinary_storage",
     "cloudinary",
+    "inventory",
     "storefront",
 ]
 
@@ -59,12 +68,17 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",   # must be high up, before CommonMiddleware
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    # ...rest unchanged...
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "https://your-frontend-domain.com",
-    "http://localhost:5173",  # Vite dev server, for local development
+    "http://localhost:5173",  # Vite dev server, local development only
 ]
 
 REST_FRAMEWORK = {
@@ -73,11 +87,27 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 24,
 }
 ```
-`AllowAny` is the default because product browsing must be public — you'll explicitly lock down specific views that shouldn't be (Section 6).
+`AllowAny` is the default because product browsing must be public — specific views are explicitly locked down in Step 8.
 
-### 1.3 New `storefront` app — models
+### Step 3 — Create the `storefront` app
+```bash
+python manage.py startapp storefront
+```
+
+### Step 4 — Add `image_url` to your existing `Product` model
 ```python
-# storefront/models.py
+# inventory/models.py — add to the existing Product class
+image_url = models.URLField(blank=True, help_text="Paste the product's Cloudinary image URL here.")
+```
+Then:
+```bash
+python manage.py makemigrations inventory
+python manage.py migrate
+```
+**Why a URL field, not a file upload field:** most hosting free tiers have an ephemeral filesystem — anything uploaded through the app disappears on the next deploy/restart. Uploading directly to Cloudinary's web console and pasting the URL avoids that entirely, with zero extra backend code.
+
+### Step 5 — `storefront/models.py`
+```python
 from decimal import Decimal
 from django.db import models
 from inventory.models import ProductVariant
@@ -101,12 +131,12 @@ class Order(models.Model):
     address = models.TextField()
     payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD_CHOICES, default="cod")
     payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default="unpaid")
-    transaction_id = models.CharField(max_length=50, blank=True)
+    transaction_id = models.CharField(max_length=50, blank=True, help_text="Customer-reported bKash/Nagad TrxID")
     subtotal = models.DecimalField(max_digits=10, decimal_places=2)
     delivery_charge = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     advance_required = models.BooleanField(default=False)
     advance_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    is_confirmed = models.BooleanField(default=False)
+    is_confirmed = models.BooleanField(default=False, help_text="Manually confirmed after checking bKash/Nagad statement")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -123,35 +153,34 @@ class OrderItem(models.Model):
     def line_total(self):
         return self.quantity * self.unit_price
 ```
+```bash
+python manage.py makemigrations storefront
+python manage.py migrate
+```
 
-### 1.4 Delivery/advance charge logic — pure function, reusable and testable
+### Step 6 — Delivery/advance charge logic (`storefront/services.py`)
 ```python
-# storefront/services.py
 from decimal import Decimal
 
 def calculate_delivery_terms(subtotal: Decimal) -> dict:
-    """Returns whether an advance is required and how much, based on order subtotal.
-
-    NOTE: confirm exact thresholds with the client before hardcoding —
-    current assumption: >5000 -> 200tk advance, >3000 -> 130tk advance, else none.
-    """
+    """Confirm exact thresholds with the client before relying on this in production.
+    Current assumption: >5000 -> 200tk advance, >3000 -> 130tk advance, else none."""
     if subtotal > Decimal("5000"):
         return {"advance_required": True, "advance_amount": Decimal("200")}
     if subtotal > Decimal("3000"):
         return {"advance_required": True, "advance_amount": Decimal("130")}
     return {"advance_required": False, "advance_amount": Decimal("0")}
 ```
-**Important:** always call this function **server-side** when an order is created — never trust an advance amount sent from the frontend. The frontend can show it for UX purposes, but the backend recalculates from the actual cart contents to prevent tampering.
+**Always call this server-side** when an order is created — never trust an advance amount sent from the frontend.
 
-### 1.5 Serializers
+### Step 7 — Serializers (`storefront/serializers.py`)
 ```python
-# storefront/serializers.py
 from rest_framework import serializers
-from inventory.models import Product, ProductVariant, Category
-from .models import Order, OrderItem
+from inventory.models import Product, ProductVariant
+from .models import Order
 
 class ProductVariantPublicSerializer(serializers.ModelSerializer):
-    """Public-safe fields only — no cost_price, batch_number, or exact stock counts."""
+    """Public-safe fields only -- no cost_price, batch_number, or exact stock counts."""
     in_stock = serializers.SerializerMethodField()
 
     class Meta:
@@ -169,8 +198,7 @@ class ProductPublicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["id", "name", "description", "category", "brand", "variants"]
-        # add "image_url" here once the field exists (Section 3)
+        fields = ["id", "name", "description", "category", "brand", "image_url", "variants"]
 
 
 class OrderItemInputSerializer(serializers.Serializer):
@@ -187,15 +215,14 @@ class OrderCreateSerializer(serializers.Serializer):
     items = OrderItemInputSerializer(many=True)
 ```
 
-### 1.6 Views
+### Step 8 — Views (`storefront/views.py`)
 ```python
-# storefront/views.py
 from decimal import Decimal
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
-from inventory.models import Product, ProductVariant, Category
+from inventory.models import Product, ProductVariant
 from .models import Order, OrderItem
 from .serializers import ProductPublicSerializer, OrderCreateSerializer
 from .services import calculate_delivery_terms
@@ -257,7 +284,7 @@ class OrderCreateView(APIView):
         }, status=status.HTTP_201_CREATED)
 ```
 
-### 1.7 URLs
+### Step 9 — URLs
 ```python
 # storefront/urls.py
 from django.urls import path
@@ -268,9 +295,18 @@ urlpatterns = [
     path("products/<int:pk>/", views.ProductDetailView.as_view(), name="product-detail"),
     path("orders/", views.OrderCreateView.as_view(), name="order-create"),
 ]
+
+# config/urls.py
+from django.contrib import admin
+from django.urls import include, path
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include("inventory.urls")),       # existing private inventory pages
+    path("api/", include("storefront.urls")),  # new public API
+]
 ```
 
-### 1.8 Admin — manual payment confirmation workflow
+### Step 10 — Admin: manual payment confirmation workflow
 ```python
 # storefront/admin.py
 from django.contrib import admin
@@ -291,48 +327,44 @@ class OrderAdmin(admin.ModelAdmin):
         queryset.update(is_confirmed=True)
     mark_confirmed.short_description = "Mark selected orders as payment-confirmed"
 ```
-This is where the shop owner does the manual bKash/Nagad transaction check — after confirming a `transaction_id` matches a real payment in their bKash/Nagad app, they select the order(s) and run this action.
 
----
-
-## 2. Wire It Up
+### Step 11 — Lock down the existing private inventory views
+Your existing `inventory/views.py` (`product_add`, `product_edit`, `stock_action`) currently has **no login check applied**, even though `login_required` is imported. Before going public, add the decorator to each:
 ```python
-# config/urls.py
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("inventory.urls")),       # existing private inventory pages
-    path("api/", include("storefront.urls")),  # new public API
-]
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def product_add(request):
+    ...
+
+@login_required
+def product_edit(request, pk):
+    ...
+
+@login_required
+def stock_action(request, pk):
+    ...
 ```
+This is a required step, not optional — skipping it means anyone who finds the URL could edit your live inventory once the site is public.
 
----
+## 1.2 Images (Cloudinary)
 
-## 3. Image Handling (Cloudinary)
-
-**Recommended shortcut for v1 (avoids backend upload complexity):**
 1. Sign up for Cloudinary's free tier.
-2. Shop owner uploads product photos directly through Cloudinary's web console.
-3. Copy the resulting image URL, paste it into a new `image_url` field you add to `Product` in `inventory/models.py`:
-```python
-image_url = models.URLField(blank=True, help_text="Paste the Cloudinary image URL here.")
-```
-4. Add `f_auto,q_auto` to the Cloudinary URL (auto format + auto quality) for automatic compression — Cloudinary supports this via URL transformation parameters, no extra code needed.
+2. Upload each product photo through Cloudinary's web console.
+3. Copy the resulting image URL into the `image_url` field on that `Product` (via Django Admin).
+4. Append `f_auto,q_auto` as a URL transformation parameter for automatic compression/format conversion — no extra code needed.
 
-This gets you shipping fast without building a file-upload endpoint. You can automate direct in-admin uploads later as a v2 improvement.
+## 1.3 Frontend: React (Vite) Setup
 
----
-
-## 4. Frontend: React (Vite) Setup
-
-### 4.1 Scaffold
+### Step 1 — Scaffold
 ```bash
 npm create vite@latest frontend -- --template react
 cd frontend
 npm install axios react-router-dom @tanstack/react-query
 ```
-`@tanstack/react-query` caches API responses (e.g. the product list) so navigating between pages feels instant instead of refetching every time — directly helps the "superfast" goal.
+`@tanstack/react-query` caches API responses so navigating between pages feels instant instead of refetching every time.
 
-### 4.2 Pages to build
+### Step 2 — Pages to build
 - `Home.jsx` — featured categories/products
 - `CategoryPage.jsx` — paginated product grid, filterable
 - `ProductDetailPage.jsx` — variant/size selector, add to cart
@@ -340,7 +372,7 @@ npm install axios react-router-dom @tanstack/react-query
 - `CheckoutPage.jsx` — customer info form + payment method + dynamic advance-charge display
 - `OrderConfirmationPage.jsx` — order summary + WhatsApp link button
 
-### 4.3 Cart — keep it client-side, no backend calls until checkout
+### Step 3 — Cart context (client-side, `localStorage`-backed)
 ```jsx
 // src/context/CartContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
@@ -375,9 +407,8 @@ export function CartProvider({ children }) {
 
 export const useCart = () => useContext(CartContext);
 ```
-Storing cart in `localStorage` means it survives a page refresh — important since customers will likely browse, leave, come back later.
 
-### 4.4 Checkout — mirror the delivery-charge logic for instant UI feedback
+### Step 4 — Checkout UI mirrors delivery-charge logic (for instant feedback only)
 ```jsx
 function calculateDeliveryTerms(subtotal) {
   if (subtotal > 5000) return { advanceRequired: true, advanceAmount: 200 };
@@ -385,18 +416,18 @@ function calculateDeliveryTerms(subtotal) {
   return { advanceRequired: false, advanceAmount: 0 };
 }
 ```
-Show this instantly in the UI as the cart total changes — but remember, the **backend recalculates this independently** on order submission (Section 1.4), so a tampered frontend value can never actually change what gets charged/confirmed.
+The **backend recalculates this independently** on submission (Step 6 above) — a tampered frontend value can never change what's actually charged/confirmed.
 
-### 4.5 On order submit
+### Step 5 — Submit order
 ```jsx
 const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/orders/`, {
   customer_name, phone, address, payment_method, transaction_id,
   items: cartItems.map(i => ({ variant_id: i.variantId, quantity: i.quantity })),
 });
-// res.data has the server-confirmed subtotal/advance_amount — use THIS to build the WhatsApp message and confirmation page, not the client-side estimate.
+// Use res.data (server-confirmed subtotal/advance_amount) for the confirmation page and WhatsApp message.
 ```
 
-### 4.6 WhatsApp deep link
+### Step 6 — WhatsApp deep link
 ```jsx
 function buildWhatsAppLink(order, items) {
   const lines = [
@@ -411,70 +442,48 @@ function buildWhatsAppLink(order, items) {
 }
 ```
 
-### 4.7 Environment variables
+### Step 7 — Environment variables
 ```
 # frontend/.env
-VITE_API_BASE_URL=https://api.sanishwapnobazar.com
+VITE_API_BASE_URL=https://api.saniswapnobazar.com
 ```
 
----
-
-## 5. Security Checklist
-
-- [ ] Public API (`/api/products/`) exposes **only** public-safe fields — never `cost_price`, `batch_number`, or exact stock counts (show `in_stock: true/false` instead of raw numbers, as in the serializer above).
-- [ ] `OrderCreateView` **recalculates** subtotal and delivery/advance charge server-side from actual product prices — never trusts a total sent from the frontend.
+## 1.4 Security Checklist (Tier A)
+- [ ] Public API exposes only public-safe fields — never `cost_price`, `batch_number`, or exact stock counts.
+- [ ] `OrderCreateView` recalculates subtotal/advance charge server-side — never trusts a frontend-sent total.
 - [ ] `CORS_ALLOWED_ORIGINS` set to your actual frontend domain only — never `"*"` in production.
-- [ ] Existing private inventory views (`product_add`, `product_edit`, `stock_action` in `inventory/views.py`) get `@login_required` added before this goes live publicly — currently unprotected.
-- [ ] `DEBUG = False` in production, with `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS` set correctly for both frontend and backend domains.
-- [ ] HTTPS enforced on both frontend and backend (automatic via chosen hosts, just verify the padlock after deploy).
-- [ ] Basic validation on order creation (required fields, phone format) to reduce spam/fake orders.
+- [ ] `@login_required` added to `product_add`, `product_edit`, `stock_action` (Step 11 above).
+- [ ] `DEBUG = False` in production, with `ALLOWED_HOSTS`/`CSRF_TRUSTED_ORIGINS` set correctly for both domains.
+- [ ] HTTPS enforced on both frontend and backend.
+- [ ] Basic input validation on order creation (required fields, phone format) to reduce spam/fake orders.
 
----
-
-## 6. Performance Checklist
-
-- [ ] Frontend deployed as a static build to Vercel/Netlify/Cloudflare Pages — served from CDN, no cold start.
-- [ ] Backend deployed on Fly.io or Railway (not a free tier that sleeps) — pick a region close to Bangladesh if available (Fly.io has a Singapore region).
-- [ ] Cloudinary image URLs include `f_auto,q_auto` for automatic compression/format.
+## 1.5 Performance Checklist (Tier A)
+- [ ] Frontend deployed as a static build to Vercel/Netlify/Cloudflare Pages — CDN-served, no cold start.
+- [ ] Backend deployed on Fly.io or Railway (not a free tier that sleeps); pick a region close to Bangladesh if available.
+- [ ] Cloudinary URLs include `f_auto,q_auto`.
 - [ ] `loading="lazy"` on all product images below the fold.
-- [ ] API responses paginated (`PAGE_SIZE = 24` set above) — never return the full catalog in one response.
-- [ ] React Query caching enabled so repeat navigation doesn't refetch unnecessarily.
-- [ ] `select_related`/`prefetch_related` used on every queryset touching related models (already applied in `ProductListView` above) — same discipline your existing `inventory/views.py` already follows, keep it consistent here.
+- [ ] API responses paginated (`PAGE_SIZE = 24`).
+- [ ] React Query caching enabled.
+- [ ] `select_related`/`prefetch_related` on every queryset touching related models.
 
----
+## 1.6 Testing Checklist (Tier A)
+- [ ] Place a test order for each payment method: COD, bKash advance, Nagad advance, full advance.
+- [ ] Test order **below ৳3,000** → confirm no advance requested.
+- [ ] Test order **between ৳3,000–5,000** → confirm ৳130 advance requested.
+- [ ] Test order **above ৳5,000** → confirm ৳200 advance requested.
+- [ ] Confirm test orders appear correctly in Django Admin, and "mark confirmed" works.
+- [ ] Test on an actual phone over mobile data, not just wifi/laptop.
+- [ ] Confirm stock doesn't oversell (order more than available quantity — should be rejected).
+- [ ] Confirm the WhatsApp link opens correctly with the pre-filled message on Android and iOS.
 
-## 7. Testing Checklist Before Launch
-
-- [ ] Place a real test order for each payment method: COD, bKash advance, Nagad advance, full advance.
-- [ ] Test order **below ৳3,000** → confirm no advance is requested.
-- [ ] Test order **between ৳3,000–5,000** → confirm ৳130 advance is requested.
-- [ ] Test order **above ৳5,000** → confirm ৳200 advance is requested.
-- [ ] Confirm each test order appears correctly in Django Admin, and the "mark confirmed" action works.
-- [ ] Test on an actual phone over mobile data (not just wifi/laptop) — this is the real usage condition for Facebook shop customers.
-- [ ] Confirm stock doesn't oversell (try ordering more than available quantity — should be rejected, per `OrderCreateView` above).
-- [ ] Confirm the WhatsApp link opens correctly with the pre-filled message on both Android and iOS.
-
----
-
-## 8. Deployment Steps
-
+## 1.7 Deployment Steps (Tier A)
 1. **Database:** create a Postgres project on Supabase or Neon, copy the connection string.
-2. **Backend (Fly.io or Railway):** connect the `backend/` folder, set environment variables (`SECRET_KEY`, `DEBUG=False`, `ALLOWED_HOSTS`, `DATABASE_URL`, `CORS_ALLOWED_ORIGINS`, Cloudinary keys if used), deploy, run migrations, create a superuser.
-3. **Frontend (Vercel/Netlify/Cloudflare Pages):** connect the `frontend/` folder, set `VITE_API_BASE_URL` to the deployed backend URL, deploy.
-4. **Domain:** point the root domain (e.g. `sanishwapnobazar.com`) to the frontend host, and a subdomain (e.g. `api.sanishwapnobazar.com`) to the backend host. Update `ALLOWED_HOSTS` and `CORS_ALLOWED_ORIGINS` to match the final domains.
+2. **Backend:** connect `backend/` to Fly.io or Railway, set environment variables (`SECRET_KEY`, `DEBUG=False`, `ALLOWED_HOSTS`, `DATABASE_URL`, `CORS_ALLOWED_ORIGINS`, Cloudinary keys), deploy, run migrations, create a superuser.
+3. **Frontend:** connect `frontend/` to Vercel/Netlify/Cloudflare Pages, set `VITE_API_BASE_URL` to the deployed backend URL, deploy.
+4. **Domain:** point the root domain to the frontend host, a subdomain (e.g. `api.saniswapnobazar.com`) to the backend host. Update `ALLOWED_HOSTS`/`CORS_ALLOWED_ORIGINS` to match.
 5. **SSL:** automatic via both hosts — verify the padlock shows on both domains after DNS propagates.
 
----
-
-## 9. Post-Launch
-
-- Set up free uptime monitoring (e.g. UptimeRobot) to alert you if the backend goes down.
-- Check Django Admin regularly for orders stuck in `advance_pending`/`full_pending` that need manual verification.
-- Periodically back up the database (export via `pg_dump` if on a free tier without automated backups).
-
----
-
-## 10. Suggested Milestone Timeline (solo, AI-assisted)
+## 1.8 Suggested Timeline (Tier A)
 
 | Week | Focus |
 |---|---|
@@ -484,4 +493,160 @@ VITE_API_BASE_URL=https://api.sanishwapnobazar.com
 | 4 | Responsive styling pass, image optimization, full testing |
 | 5 (buffer) | Deployment, domain setup, bug fixes |
 
-This lines up with the 3–5 week Tier A timeline quoted to the client.
+---
+
+# PART 2 — TIER B: UPGRADING TO AN AUTOMATED PAYMENT GATEWAY
+
+Only start this part once Part 1 is live and stable. This adds SSLCommerz (or a similar licensed BD payment gateway) so bKash/Nagad/card payments are processed automatically instead of manually verified.
+
+## 2.0 Prerequisite
+The client must have a **registered trade license and business bank account** to open a merchant account with the payment gateway. Confirm this before starting — do not begin integration work without confirmed merchant credentials, since sandbox testing can proceed without them but production cannot go live without them.
+
+## 2.1 Install the gateway SDK
+```bash
+pip install sslcommerz-python   # or the current officially maintained package -- verify latest on PyPI before installing
+```
+
+## 2.2 New model fields on `Order`
+```python
+# storefront/models.py -- add to Order
+gateway_transaction_id = models.CharField(max_length=100, blank=True)
+gateway_val_id = models.CharField(max_length=100, blank=True)
+gateway_status = models.CharField(max_length=30, blank=True)
+```
+```bash
+python manage.py makemigrations storefront
+python manage.py migrate
+```
+
+## 2.3 Initiate-payment endpoint
+```python
+# storefront/gateway_views.py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.conf import settings
+from .models import Order
+import requests
+
+class InitiatePaymentView(APIView):
+    def post(self, request, order_id):
+        order = Order.objects.get(pk=order_id)
+        payload = {
+            "store_id": settings.SSLCOMMERZ_STORE_ID,
+            "store_passwd": settings.SSLCOMMERZ_STORE_PASSWORD,
+            "total_amount": str(order.subtotal),
+            "currency": "BDT",
+            "tran_id": f"order-{order.pk}",
+            "success_url": f"{settings.BACKEND_BASE_URL}/api/payments/success/",
+            "fail_url": f"{settings.BACKEND_BASE_URL}/api/payments/fail/",
+            "cancel_url": f"{settings.BACKEND_BASE_URL}/api/payments/cancel/",
+            "cus_name": order.customer_name,
+            "cus_phone": order.phone,
+            "cus_add1": order.address,
+        }
+        resp = requests.post(settings.SSLCOMMERZ_API_URL, data=payload, timeout=10)
+        data = resp.json()
+        return Response({"payment_url": data.get("GatewayPageURL")})
+```
+**Verify the exact request/response field names against SSLCommerz's current official API documentation before implementing** — payment gateway APIs change field names between versions, and this is the single most important step to get right, since it directly handles money.
+
+## 2.4 Webhook/callback handling — verify, don't trust blindly
+```python
+class PaymentSuccessCallbackView(APIView):
+    def post(self, request):
+        val_id = request.data.get("val_id")
+        tran_id = request.data.get("tran_id")
+
+        # CRITICAL: always call SSLCommerz's "Order Validation API" server-to-server
+        # to confirm val_id is genuine before marking anything as paid.
+        # Never trust the success callback alone -- it can be spoofed.
+        is_valid = verify_with_gateway(val_id)  # implement using their validation endpoint
+
+        if is_valid:
+            order_pk = tran_id.replace("order-", "")
+            order = Order.objects.get(pk=order_pk)
+            order.gateway_val_id = val_id
+            order.gateway_status = "validated"
+            order.payment_status = "full_confirmed"
+            order.is_confirmed = True
+            order.save()
+        return Response({"status": "ok"})
+```
+This server-to-server validation step is the most important security control in Tier B — skipping it means anyone could fake a "payment successful" callback.
+
+## 2.5 Frontend changes
+- Checkout page adds a "Pay Now" button when bKash/Nagad/Card is selected, calling `InitiatePaymentView` and redirecting the browser to the returned `payment_url`.
+- `OrderConfirmationPage.jsx` handles both the redirect-back-successful case and a "payment failed, retry" case.
+
+## 2.6 Testing Checklist (Tier B)
+- [ ] Full sandbox test cycle: successful payment, failed payment, cancelled payment, before touching production credentials.
+- [ ] Confirm server-to-server validation actually rejects a forged/tampered callback (test this deliberately).
+- [ ] Confirm order stock/status updates only happen after validation succeeds, never on the raw callback alone.
+- [ ] Test refund flow through the gateway's dashboard/API.
+- [ ] Load-test nothing critical — but do manually test what happens if a customer closes the browser mid-payment (order should stay in a pending state, not silently lost).
+
+## 2.7 Suggested Timeline (Tier B upgrade)
+| Week | Focus |
+|---|---|
+| 1 | Merchant account/API credentials, sandbox integration, initiate-payment endpoint |
+| 2 | Callback/webhook handling + server-to-server validation, frontend payment UI |
+| 3 (buffer) | Full sandbox testing, production cutover, live monitoring after launch |
+
+---
+
+# PART 3 — OPTIONAL: FRAUD-ORDER DETECTION
+
+Checks a customer's phone number against Bangladeshi courier delivery history (successful deliveries vs. cancellations/non-receipt) before a Cash on Delivery order is processed, using a BD-specific fraud-checking API.
+
+## 3.1 Choosing a provider
+One available option: **FraudDetect** ([courierapi.chowdhury.bd](https://courierapi.chowdhury.bd/)) — aggregates Steadfast, Pathao, RedX, Paperfly, and Carrybee delivery history in one API call.
+
+| Plan | Monthly checks | Price |
+|---|---|---|
+| Free | 500/month | ৳0 |
+| Pro | 10,000/month | ৳999/month |
+| Enterprise | Unlimited | Custom |
+
+At current order volume, the Free tier is sufficient. Re-evaluate only if order volume grows well beyond ~15/day sustained.
+
+## 3.2 Backend integration
+```python
+# storefront/fraud_check.py
+import requests
+from django.conf import settings
+
+def check_fraud_risk(phone: str) -> dict:
+    """Returns aggregate delivery/cancel ratio for a phone number, or None if the check fails.
+    Never block an order on this failing -- treat it as informational only."""
+    try:
+        resp = requests.post(
+            "https://courierapi.chowdhury.bd/api/v1/check",
+            headers={"X-Api-Key": settings.FRAUD_CHECK_API_KEY},
+            json={"phone": phone},
+            timeout=5,
+        )
+        resp.raise_for_status()
+        return resp.json()
+    except requests.RequestException:
+        return None
+```
+
+## 3.3 Wire it into order creation (informational, non-blocking)
+```python
+# storefront/views.py -- inside OrderCreateView.post(), after saving the order
+from .fraud_check import check_fraud_risk
+
+fraud_data = check_fraud_risk(order.phone)
+if fraud_data:
+    order.fraud_success_ratio = fraud_data["aggregate"]["success_ratio"]
+    order.fraud_cancel_ratio = fraud_data["aggregate"]["cancel_ratio"]
+    order.save()
+```
+Add matching fields to the `Order` model (`fraud_success_ratio`, `fraud_cancel_ratio`, both nullable decimals), migrate, and surface them in `OrderAdmin.list_display` so you can see risk at a glance before confirming/shipping an order.
+
+**Important design decision:** treat this as informational, never as an automatic blocker. A low success ratio should prompt you to call the customer to confirm before shipping, not silently cancel their order — false positives are common (e.g. a customer who moved cities, or shared a number with someone else), and auto-rejecting real customers costs you more than the fraud it prevents.
+
+## 3.4 Testing
+- [ ] Test with a known low-risk number (should show a normal/high success ratio).
+- [ ] Test with the API key intentionally wrong/missing — confirm the order still saves successfully (non-blocking behavior working correctly).
+- [ ] Confirm the risk data is visible in Django Admin next to each order.
