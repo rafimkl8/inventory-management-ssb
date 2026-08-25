@@ -1,0 +1,2978 @@
+[
+{
+  "model": "inventory.category",
+  "pk": 1,
+  "fields": {
+    "name": "Shampoo"
+  }
+},
+{
+  "model": "inventory.category",
+  "pk": 2,
+  "fields": {
+    "name": "Soap"
+  }
+},
+{
+  "model": "inventory.category",
+  "pk": 3,
+  "fields": {
+    "name": "Perfume"
+  }
+},
+{
+  "model": "inventory.category",
+  "pk": 4,
+  "fields": {
+    "name": "Body Spray"
+  }
+},
+{
+  "model": "inventory.category",
+  "pk": 5,
+  "fields": {
+    "name": "Chocolate"
+  }
+},
+{
+  "model": "inventory.category",
+  "pk": 6,
+  "fields": {
+    "name": "Biscuit"
+  }
+},
+{
+  "model": "inventory.category",
+  "pk": 7,
+  "fields": {
+    "name": "Powdered Milk"
+  }
+},
+{
+  "model": "inventory.category",
+  "pk": 8,
+  "fields": {
+    "name": "Tang"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 1,
+  "fields": {
+    "name": "Sunsilk"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 2,
+  "fields": {
+    "name": "Loreal"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 3,
+  "fields": {
+    "name": "Pantene"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 4,
+  "fields": {
+    "name": "Clear"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 5,
+  "fields": {
+    "name": "Dove"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 6,
+  "fields": {
+    "name": "Head & Shoulder"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 7,
+  "fields": {
+    "name": "Parachute"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 8,
+  "fields": {
+    "name": "Vatica"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 9,
+  "fields": {
+    "name": "Garnier"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 10,
+  "fields": {
+    "name": "Cetaphil"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 11,
+  "fields": {
+    "name": "Jergens"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 12,
+  "fields": {
+    "name": "Dettole"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 13,
+  "fields": {
+    "name": "Imperial Leather"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 14,
+  "fields": {
+    "name": "Sheikh Al Musk"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 15,
+  "fields": {
+    "name": "Nivea"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 16,
+  "fields": {
+    "name": "Axe"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 17,
+  "fields": {
+    "name": "Fogg"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 18,
+  "fields": {
+    "name": "Rexona"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 19,
+  "fields": {
+    "name": "Luxury"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 20,
+  "fields": {
+    "name": "Roshen"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 21,
+  "fields": {
+    "name": "Nestle"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 22,
+  "fields": {
+    "name": "Mars"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 23,
+  "fields": {
+    "name": "Deemah"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 24,
+  "fields": {
+    "name": "Almarai"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 25,
+  "fields": {
+    "name": "Anchor"
+  }
+},
+{
+  "model": "inventory.company",
+  "pk": 26,
+  "fields": {
+    "name": "Tang"
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 1,
+  "fields": {
+    "name": "Sunsilk",
+    "company": 1
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 2,
+  "fields": {
+    "name": "Elvive",
+    "company": 2
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 3,
+  "fields": {
+    "name": "Pantene",
+    "company": 3
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 4,
+  "fields": {
+    "name": "Men",
+    "company": 4
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 5,
+  "fields": {
+    "name": "Dove",
+    "company": 5
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 6,
+  "fields": {
+    "name": "Head & Shoulder",
+    "company": 6
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 7,
+  "fields": {
+    "name": "Parachute",
+    "company": 7
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 8,
+  "fields": {
+    "name": "Vatica",
+    "company": 8
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 9,
+  "fields": {
+    "name": "Garnier",
+    "company": 9
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 10,
+  "fields": {
+    "name": "Cetaphil",
+    "company": 10
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 11,
+  "fields": {
+    "name": "Jergens",
+    "company": 11
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 12,
+  "fields": {
+    "name": "Dettole",
+    "company": 12
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 13,
+  "fields": {
+    "name": "Imperial Leather",
+    "company": 13
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 14,
+  "fields": {
+    "name": "Sheikh Al Musk",
+    "company": 14
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 15,
+  "fields": {
+    "name": "Nivea",
+    "company": 15
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 16,
+  "fields": {
+    "name": "Axe",
+    "company": 16
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 17,
+  "fields": {
+    "name": "Fogg",
+    "company": 17
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 18,
+  "fields": {
+    "name": "Rexona",
+    "company": 18
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 19,
+  "fields": {
+    "name": "Luxury",
+    "company": 19
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 20,
+  "fields": {
+    "name": "Roshen",
+    "company": 20
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 21,
+  "fields": {
+    "name": "Nestle",
+    "company": 21
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 22,
+  "fields": {
+    "name": "Mars",
+    "company": 22
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 23,
+  "fields": {
+    "name": "Nice Biscuit",
+    "company": 23
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 24,
+  "fields": {
+    "name": "Deemah",
+    "company": 23
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 25,
+  "fields": {
+    "name": "Almarai",
+    "company": 24
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 26,
+  "fields": {
+    "name": "Anchor",
+    "company": 25
+  }
+},
+{
+  "model": "inventory.brand",
+  "pk": 27,
+  "fields": {
+    "name": "Tang",
+    "company": 26
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 1,
+  "fields": {
+    "name": "Amino Silk",
+    "brand": 1,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T09:39:16.768Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 2,
+  "fields": {
+    "name": "Hairfall Solution",
+    "brand": 1,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T14:51:32.468Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 3,
+  "fields": {
+    "name": "Instant Repair",
+    "brand": 1,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T14:54:09.702Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 4,
+  "fields": {
+    "name": "Anti Breakage",
+    "brand": 1,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T14:55:05.820Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 5,
+  "fields": {
+    "name": "Thick & Long",
+    "brand": 1,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T14:56:41.527Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 6,
+  "fields": {
+    "name": "Glycol Vita C",
+    "brand": 1,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T14:57:19.476Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 7,
+  "fields": {
+    "name": "Coconut",
+    "brand": 1,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T14:58:28.661Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 8,
+  "fields": {
+    "name": "Strength & Shine",
+    "brand": 1,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T14:59:17.082Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 9,
+  "fields": {
+    "name": "Gloss",
+    "brand": 2,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:08:32.640Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 10,
+  "fields": {
+    "name": "D. Long & Straight",
+    "brand": 2,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:10:56.884Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 11,
+  "fields": {
+    "name": "Fall Resistant",
+    "brand": 2,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:12:11.508Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 12,
+  "fields": {
+    "name": "Moisture",
+    "brand": 2,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:14:40.406Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 13,
+  "fields": {
+    "name": "Purifying",
+    "brand": 2,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:16:12.593Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 14,
+  "fields": {
+    "name": "Extra Ordinary",
+    "brand": 2,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:18:13.815Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 15,
+  "fields": {
+    "name": "Anti Dandruff",
+    "brand": 3,
+    "category": 1,
+    "country_of_origin": "Germany",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:21:17.516Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 16,
+  "fields": {
+    "name": "Daily Care",
+    "brand": 3,
+    "category": 1,
+    "country_of_origin": "Germany",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:22:21.735Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 17,
+  "fields": {
+    "name": "Share Volume",
+    "brand": 3,
+    "category": 1,
+    "country_of_origin": "Germany",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:23:39.471Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 18,
+  "fields": {
+    "name": "Anti Hairfall",
+    "brand": 3,
+    "category": 1,
+    "country_of_origin": "Germany",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:25:01.531Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 19,
+  "fields": {
+    "name": "Moisturing & Renewall",
+    "brand": 3,
+    "category": 1,
+    "country_of_origin": "Germany",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:26:15.298Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 20,
+  "fields": {
+    "name": "Active Fresh",
+    "brand": 4,
+    "category": 1,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:28:42.464Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 21,
+  "fields": {
+    "name": "Hairfall Defense",
+    "brand": 4,
+    "category": 1,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:32:24.925Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 22,
+  "fields": {
+    "name": "Style Express",
+    "brand": 4,
+    "category": 1,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:33:45.508Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 23,
+  "fields": {
+    "name": "Deep Clean",
+    "brand": 4,
+    "category": 1,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:34:46.891Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 24,
+  "fields": {
+    "name": "Menthol",
+    "brand": 4,
+    "category": 1,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:36:25.495Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 25,
+  "fields": {
+    "name": "Damage Expert",
+    "brand": 5,
+    "category": 1,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:43:33.558Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 26,
+  "fields": {
+    "name": "Anti Dandruff",
+    "brand": 6,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:48:25.713Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 27,
+  "fields": {
+    "name": "Smooth Silk",
+    "brand": 6,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:50:39.647Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 28,
+  "fields": {
+    "name": "Coco-Olive",
+    "brand": 7,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:52:31.091Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 29,
+  "fields": {
+    "name": "Anti Hairfall",
+    "brand": 7,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:53:20.214Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 30,
+  "fields": {
+    "name": "Damage Repair",
+    "brand": 7,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:55:08.756Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 31,
+  "fields": {
+    "name": "Coco-Rice",
+    "brand": 7,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:56:25.314Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 32,
+  "fields": {
+    "name": "Anti Dandruff",
+    "brand": 7,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:57:11.469Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 33,
+  "fields": {
+    "name": "Daily Moisture",
+    "brand": 7,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:58:29.068Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 34,
+  "fields": {
+    "name": "Red Onion",
+    "brand": 8,
+    "category": 1,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T15:59:49.089Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 35,
+  "fields": {
+    "name": "Nourish & Protect",
+    "brand": 8,
+    "category": 1,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:01:56.840Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 36,
+  "fields": {
+    "name": "Anti Breakage",
+    "brand": 8,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:02:46.485Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 37,
+  "fields": {
+    "name": "Shampoo & Conditioner",
+    "brand": 5,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:04:11.172Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 38,
+  "fields": {
+    "name": "Ultra Doux",
+    "brand": 9,
+    "category": 1,
+    "country_of_origin": "Egypt",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:04:59.269Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 39,
+  "fields": {
+    "name": "Baby Wash",
+    "brand": 10,
+    "category": 1,
+    "country_of_origin": "Germany",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:06:00.282Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 40,
+  "fields": {
+    "name": "Lavender Thickness",
+    "brand": 5,
+    "category": 1,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:11:02.354Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 41,
+  "fields": {
+    "name": "Hyaluronic Acid Daily Hydration",
+    "brand": 5,
+    "category": 1,
+    "country_of_origin": "NA",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:13:18.176Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 42,
+  "fields": {
+    "name": "Softening Musk",
+    "brand": 11,
+    "category": 2,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:23:29.934Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 43,
+  "fields": {
+    "name": "Anti Bacterial",
+    "brand": 11,
+    "category": 2,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:24:10.818Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 44,
+  "fields": {
+    "name": "Dettole",
+    "brand": 12,
+    "category": 2,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:25:00.601Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 45,
+  "fields": {
+    "name": "Imperial Leather",
+    "brand": 13,
+    "category": 2,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:27:14.495Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 46,
+  "fields": {
+    "name": "Cleansing Bar",
+    "brand": 10,
+    "category": 2,
+    "country_of_origin": "USA",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:29:31.564Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 47,
+  "fields": {
+    "name": "Sheikh Al Musk",
+    "brand": 14,
+    "category": 3,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:30:55.619Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 48,
+  "fields": {
+    "name": "Pearl & Beauty",
+    "brand": 15,
+    "category": 4,
+    "country_of_origin": "Germany",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:32:57.556Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 49,
+  "fields": {
+    "name": "Cherry & Spritz",
+    "brand": 16,
+    "category": 4,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:34:30.967Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 50,
+  "fields": {
+    "name": "Aqua",
+    "brand": 16,
+    "category": 4,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:35:01.585Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 51,
+  "fields": {
+    "name": "Magnetic",
+    "brand": 17,
+    "category": 4,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:36:08.738Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 52,
+  "fields": {
+    "name": "Ice Fresh",
+    "brand": 18,
+    "category": 4,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:37:06.085Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 53,
+  "fields": {
+    "name": "Workout",
+    "brand": 18,
+    "category": 4,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:37:38.448Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 54,
+  "fields": {
+    "name": "Cream Fudge",
+    "brand": 19,
+    "category": 5,
+    "country_of_origin": "Poland",
+    "date_added": "2026-08-21",
+    "description": "",
+    "created_at": "2026-08-21T16:39:51.326Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 55,
+  "fields": {
+    "name": "Konafetto",
+    "brand": 20,
+    "category": 5,
+    "country_of_origin": "South Africa",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:41:47.007Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 56,
+  "fields": {
+    "name": "Kitkat",
+    "brand": 21,
+    "category": 5,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:43:32.390Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 57,
+  "fields": {
+    "name": "Bounty",
+    "brand": 22,
+    "category": 5,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:45:22.164Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 58,
+  "fields": {
+    "name": "Toffelini",
+    "brand": 20,
+    "category": 5,
+    "country_of_origin": "UAE",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:46:22.774Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 59,
+  "fields": {
+    "name": "Coconut",
+    "brand": 23,
+    "category": 6,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:48:14.027Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 60,
+  "fields": {
+    "name": "Glucose",
+    "brand": 23,
+    "category": 6,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:49:28.135Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 61,
+  "fields": {
+    "name": "Neo",
+    "brand": 24,
+    "category": 6,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:50:43.104Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 62,
+  "fields": {
+    "name": "Nido",
+    "brand": 21,
+    "category": 7,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:54:45.653Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 63,
+  "fields": {
+    "name": "Almarai",
+    "brand": 25,
+    "category": 7,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:55:45.529Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 64,
+  "fields": {
+    "name": "Anchor",
+    "brand": 26,
+    "category": 7,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:57:02.201Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 65,
+  "fields": {
+    "name": "Orange",
+    "brand": 27,
+    "category": 8,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T16:59:43.375Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 66,
+  "fields": {
+    "name": "Mango",
+    "brand": 27,
+    "category": 8,
+    "country_of_origin": "Saudi Arabia",
+    "date_added": "2026-07-20",
+    "description": "",
+    "created_at": "2026-08-21T17:00:50.950Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 1,
+  "fields": {
+    "product": 1,
+    "size_label": "700ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "3.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1690.00",
+    "batch_number": "",
+    "expiry_date": "2029-03-31",
+    "created_at": "2026-08-21T09:39:16.781Z",
+    "updated_at": "2026-08-21T15:00:05.614Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 2,
+  "fields": {
+    "product": 1,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "7.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-02-28",
+    "created_at": "2026-08-21T09:39:16.781Z",
+    "updated_at": "2026-08-21T15:00:18.992Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 3,
+  "fields": {
+    "product": 1,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-05-31",
+    "created_at": "2026-08-21T09:39:16.781Z",
+    "updated_at": "2026-08-21T09:39:16.781Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 4,
+  "fields": {
+    "product": 1,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-06-30",
+    "created_at": "2026-08-21T09:39:16.781Z",
+    "updated_at": "2026-08-21T09:39:16.781Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 5,
+  "fields": {
+    "product": 2,
+    "size_label": "700ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1590.00",
+    "batch_number": "",
+    "expiry_date": "2029-02-28",
+    "created_at": "2026-08-21T14:51:32.470Z",
+    "updated_at": "2026-08-21T14:51:32.470Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 6,
+  "fields": {
+    "product": 2,
+    "size_label": "700ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1590.00",
+    "batch_number": "",
+    "expiry_date": "2029-03-31",
+    "created_at": "2026-08-21T14:51:32.472Z",
+    "updated_at": "2026-08-21T14:51:32.472Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 7,
+  "fields": {
+    "product": 2,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "3.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "980.00",
+    "batch_number": "",
+    "expiry_date": "2029-03-31",
+    "created_at": "2026-08-21T14:51:32.472Z",
+    "updated_at": "2026-08-21T14:52:06.625Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 8,
+  "fields": {
+    "product": 3,
+    "size_label": "700ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "7.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1590.00",
+    "batch_number": "",
+    "expiry_date": "2029-01-31",
+    "created_at": "2026-08-21T14:54:09.703Z",
+    "updated_at": "2026-08-21T14:54:09.703Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 9,
+  "fields": {
+    "product": 3,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "980.00",
+    "batch_number": "",
+    "expiry_date": "2028-09-30",
+    "created_at": "2026-08-21T14:54:09.703Z",
+    "updated_at": "2026-08-21T14:54:09.703Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 10,
+  "fields": {
+    "product": 4,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2028-05-31",
+    "created_at": "2026-08-21T14:55:05.832Z",
+    "updated_at": "2026-08-21T14:55:05.832Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 11,
+  "fields": {
+    "product": 5,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2028-12-31",
+    "created_at": "2026-08-21T14:56:41.528Z",
+    "updated_at": "2026-08-21T14:56:41.528Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 12,
+  "fields": {
+    "product": 5,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-04-30",
+    "created_at": "2026-08-21T14:56:41.528Z",
+    "updated_at": "2026-08-21T14:56:41.528Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 13,
+  "fields": {
+    "product": 5,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-05-31",
+    "created_at": "2026-08-21T14:56:41.528Z",
+    "updated_at": "2026-08-21T14:56:41.528Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 14,
+  "fields": {
+    "product": 6,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2028-09-30",
+    "created_at": "2026-08-21T14:57:19.485Z",
+    "updated_at": "2026-08-21T14:57:19.485Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 15,
+  "fields": {
+    "product": 7,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2028-05-31",
+    "created_at": "2026-08-21T14:58:28.661Z",
+    "updated_at": "2026-08-21T14:58:28.661Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 16,
+  "fields": {
+    "product": 7,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-01-31",
+    "created_at": "2026-08-21T14:58:28.661Z",
+    "updated_at": "2026-08-21T14:58:28.661Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 17,
+  "fields": {
+    "product": 8,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-02-28",
+    "created_at": "2026-08-21T14:59:17.098Z",
+    "updated_at": "2026-08-21T14:59:17.098Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 18,
+  "fields": {
+    "product": 8,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-04-30",
+    "created_at": "2026-08-21T14:59:17.098Z",
+    "updated_at": "2026-08-21T14:59:17.098Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 19,
+  "fields": {
+    "product": 9,
+    "size_label": "600ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "3.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1500.00",
+    "batch_number": "",
+    "expiry_date": "2028-11-30",
+    "created_at": "2026-08-21T15:08:32.640Z",
+    "updated_at": "2026-08-21T15:08:32.640Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 20,
+  "fields": {
+    "product": 9,
+    "size_label": "600ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1500.00",
+    "batch_number": "",
+    "expiry_date": "2028-08-31",
+    "created_at": "2026-08-21T15:08:32.640Z",
+    "updated_at": "2026-08-21T15:08:32.640Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 21,
+  "fields": {
+    "product": 10,
+    "size_label": "600",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "3.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1500.00",
+    "batch_number": "",
+    "expiry_date": "2028-04-30",
+    "created_at": "2026-08-21T15:10:56.897Z",
+    "updated_at": "2026-08-21T15:10:56.897Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 22,
+  "fields": {
+    "product": 11,
+    "size_label": "600",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1500.00",
+    "batch_number": "",
+    "expiry_date": "2028-08-31",
+    "created_at": "2026-08-21T15:12:11.508Z",
+    "updated_at": "2026-08-21T15:12:11.508Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 23,
+  "fields": {
+    "product": 12,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1250.00",
+    "batch_number": "",
+    "expiry_date": "2028-09-30",
+    "created_at": "2026-08-21T15:14:40.420Z",
+    "updated_at": "2026-08-21T15:14:40.420Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 24,
+  "fields": {
+    "product": 12,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1250.00",
+    "batch_number": "",
+    "expiry_date": "2028-05-31",
+    "created_at": "2026-08-21T15:14:40.420Z",
+    "updated_at": "2026-08-21T15:14:40.420Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 25,
+  "fields": {
+    "product": 13,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1250.00",
+    "batch_number": "",
+    "expiry_date": "2028-10-31",
+    "created_at": "2026-08-21T15:16:12.606Z",
+    "updated_at": "2026-08-21T15:16:12.606Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 26,
+  "fields": {
+    "product": 13,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1250.00",
+    "batch_number": "",
+    "expiry_date": "2028-11-30",
+    "created_at": "2026-08-21T15:16:12.606Z",
+    "updated_at": "2026-08-21T15:16:12.606Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 27,
+  "fields": {
+    "product": 14,
+    "size_label": "400",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1250.00",
+    "batch_number": "",
+    "expiry_date": "2028-10-31",
+    "created_at": "2026-08-21T15:18:13.829Z",
+    "updated_at": "2026-08-21T15:18:13.829Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 28,
+  "fields": {
+    "product": 15,
+    "size_label": "375ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "18.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "990.00",
+    "batch_number": "",
+    "expiry_date": "2029-04-30",
+    "created_at": "2026-08-21T15:21:17.531Z",
+    "updated_at": "2026-08-21T15:21:17.531Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 29,
+  "fields": {
+    "product": 16,
+    "size_label": "375ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "3.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "990.00",
+    "batch_number": "",
+    "expiry_date": "2029-04-30",
+    "created_at": "2026-08-21T15:22:21.746Z",
+    "updated_at": "2026-08-21T15:22:21.746Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 30,
+  "fields": {
+    "product": 17,
+    "size_label": "375ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "12.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "990.00",
+    "batch_number": "",
+    "expiry_date": "2029-05-31",
+    "created_at": "2026-08-21T15:23:39.484Z",
+    "updated_at": "2026-08-21T15:23:39.484Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 31,
+  "fields": {
+    "product": 18,
+    "size_label": "375ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "990.00",
+    "batch_number": "",
+    "expiry_date": "2029-04-30",
+    "created_at": "2026-08-21T15:25:01.532Z",
+    "updated_at": "2026-08-21T15:25:01.532Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 32,
+  "fields": {
+    "product": 19,
+    "size_label": "375ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "18.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "990.00",
+    "batch_number": "",
+    "expiry_date": "2029-05-31",
+    "created_at": "2026-08-21T15:26:15.298Z",
+    "updated_at": "2026-08-21T15:26:15.298Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 33,
+  "fields": {
+    "product": 20,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1150.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T15:28:42.477Z",
+    "updated_at": "2026-08-21T15:28:42.477Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 34,
+  "fields": {
+    "product": 21,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1150.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T15:32:24.925Z",
+    "updated_at": "2026-08-21T15:32:24.925Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 35,
+  "fields": {
+    "product": 22,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1150.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T15:33:45.522Z",
+    "updated_at": "2026-08-21T15:33:45.522Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 36,
+  "fields": {
+    "product": 23,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "3.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1150.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T15:34:46.894Z",
+    "updated_at": "2026-08-21T15:34:46.894Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 37,
+  "fields": {
+    "product": 24,
+    "size_label": "600ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "10.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "0.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T15:36:25.510Z",
+    "updated_at": "2026-08-21T16:08:57.819Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 39,
+  "fields": {
+    "product": 26,
+    "size_label": "1000ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2300.00",
+    "batch_number": "",
+    "expiry_date": "2029-02-28",
+    "created_at": "2026-08-21T15:48:25.726Z",
+    "updated_at": "2026-08-21T15:48:25.726Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 40,
+  "fields": {
+    "product": 27,
+    "size_label": "600ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1600.00",
+    "batch_number": "",
+    "expiry_date": "2028-04-30",
+    "created_at": "2026-08-21T15:50:39.647Z",
+    "updated_at": "2026-08-21T15:50:39.647Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 41,
+  "fields": {
+    "product": 28,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2028-08-31",
+    "created_at": "2026-08-21T15:52:31.106Z",
+    "updated_at": "2026-08-21T15:52:31.106Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 42,
+  "fields": {
+    "product": 29,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T15:53:20.225Z",
+    "updated_at": "2026-08-21T15:53:20.225Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 43,
+  "fields": {
+    "product": 30,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "3.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T15:55:08.768Z",
+    "updated_at": "2026-08-21T15:55:08.768Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 44,
+  "fields": {
+    "product": 31,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2028-08-31",
+    "created_at": "2026-08-21T15:56:25.325Z",
+    "updated_at": "2026-08-21T16:18:45.875Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 45,
+  "fields": {
+    "product": 32,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "5.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2028-06-30",
+    "created_at": "2026-08-21T15:57:11.482Z",
+    "updated_at": "2026-08-21T15:57:11.482Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 46,
+  "fields": {
+    "product": 33,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2028-06-30",
+    "created_at": "2026-08-21T15:58:29.081Z",
+    "updated_at": "2026-08-21T15:58:29.081Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 47,
+  "fields": {
+    "product": 34,
+    "size_label": "360ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "850.00",
+    "batch_number": "",
+    "expiry_date": "2027-12-31",
+    "created_at": "2026-08-21T15:59:49.101Z",
+    "updated_at": "2026-08-21T16:19:47.637Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 48,
+  "fields": {
+    "product": 35,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "9.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "900.00",
+    "batch_number": "",
+    "expiry_date": "2028-02-29",
+    "created_at": "2026-08-21T16:01:56.852Z",
+    "updated_at": "2026-08-21T16:01:56.852Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 49,
+  "fields": {
+    "product": 36,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "900.00",
+    "batch_number": "",
+    "expiry_date": "2028-03-31",
+    "created_at": "2026-08-21T16:02:46.487Z",
+    "updated_at": "2026-08-21T16:02:46.487Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 50,
+  "fields": {
+    "product": 37,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T16:04:11.185Z",
+    "updated_at": "2026-08-21T16:04:11.185Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 51,
+  "fields": {
+    "product": 38,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T16:04:59.284Z",
+    "updated_at": "2026-08-21T16:04:59.284Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 52,
+  "fields": {
+    "product": 39,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2600.00",
+    "batch_number": "",
+    "expiry_date": "2028-10-31",
+    "created_at": "2026-08-21T16:06:00.296Z",
+    "updated_at": "2026-08-21T16:21:33.296Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 53,
+  "fields": {
+    "product": 40,
+    "size_label": "600ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "7.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1250.00",
+    "batch_number": "",
+    "expiry_date": "2029-01-31",
+    "created_at": "2026-08-21T16:11:02.366Z",
+    "updated_at": "2026-08-21T16:11:02.366Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 54,
+  "fields": {
+    "product": 41,
+    "size_label": "400ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "6.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": "2029-01-31",
+    "created_at": "2026-08-21T16:13:18.179Z",
+    "updated_at": "2026-08-21T16:13:18.179Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 55,
+  "fields": {
+    "product": 27,
+    "size_label": "500ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1400.00",
+    "batch_number": "",
+    "expiry_date": "2029-01-31",
+    "created_at": "2026-08-21T16:15:17.784Z",
+    "updated_at": "2026-08-21T16:15:17.784Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 56,
+  "fields": {
+    "product": 27,
+    "size_label": "500ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "3.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1400.00",
+    "batch_number": "",
+    "expiry_date": "2029-05-31",
+    "created_at": "2026-08-21T16:15:17.864Z",
+    "updated_at": "2026-08-21T16:15:17.864Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 57,
+  "fields": {
+    "product": 31,
+    "size_label": "340ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1050.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T16:18:45.912Z",
+    "updated_at": "2026-08-21T16:18:45.912Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 58,
+  "fields": {
+    "product": 42,
+    "size_label": "135g",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "12.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "250.00",
+    "batch_number": "",
+    "expiry_date": "2028-02-29",
+    "created_at": "2026-08-21T16:23:29.940Z",
+    "updated_at": "2026-08-21T16:23:29.940Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 59,
+  "fields": {
+    "product": 43,
+    "size_label": "135g",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "24.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "250.00",
+    "batch_number": "",
+    "expiry_date": "2029-02-28",
+    "created_at": "2026-08-21T16:24:10.834Z",
+    "updated_at": "2026-08-21T16:24:10.834Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 60,
+  "fields": {
+    "product": 44,
+    "size_label": "135g",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "250.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T16:25:00.633Z",
+    "updated_at": "2026-08-21T16:25:00.633Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 61,
+  "fields": {
+    "product": 45,
+    "size_label": "135g",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "36.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "250.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T16:27:14.509Z",
+    "updated_at": "2026-08-21T16:27:14.509Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 62,
+  "fields": {
+    "product": 46,
+    "size_label": "135g",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1100.00",
+    "batch_number": "",
+    "expiry_date": "2028-08-31",
+    "created_at": "2026-08-21T16:29:31.579Z",
+    "updated_at": "2026-08-21T16:29:31.579Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 63,
+  "fields": {
+    "product": 46,
+    "size_label": "135g",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1100.00",
+    "batch_number": "",
+    "expiry_date": "2028-09-30",
+    "created_at": "2026-08-21T16:29:31.579Z",
+    "updated_at": "2026-08-21T16:29:31.579Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 64,
+  "fields": {
+    "product": 47,
+    "size_label": "200ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "13.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2200.00",
+    "batch_number": "",
+    "expiry_date": "2031-01-31",
+    "created_at": "2026-08-21T16:30:55.622Z",
+    "updated_at": "2026-08-21T16:30:55.622Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 65,
+  "fields": {
+    "product": 48,
+    "size_label": "150ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "5.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1450.00",
+    "batch_number": "",
+    "expiry_date": "2028-06-30",
+    "created_at": "2026-08-21T16:32:57.572Z",
+    "updated_at": "2026-08-21T16:32:57.572Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 66,
+  "fields": {
+    "product": 49,
+    "size_label": "150ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1400.00",
+    "batch_number": "",
+    "expiry_date": "2029-10-31",
+    "created_at": "2026-08-21T16:34:30.973Z",
+    "updated_at": "2026-08-21T16:34:30.973Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 67,
+  "fields": {
+    "product": 49,
+    "size_label": "150ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1400.00",
+    "batch_number": "",
+    "expiry_date": "2029-05-31",
+    "created_at": "2026-08-21T16:34:30.974Z",
+    "updated_at": "2026-08-21T16:34:30.974Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 68,
+  "fields": {
+    "product": 50,
+    "size_label": "150ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1400.00",
+    "batch_number": "",
+    "expiry_date": "2029-03-31",
+    "created_at": "2026-08-21T16:35:01.599Z",
+    "updated_at": "2026-08-21T16:35:01.599Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 69,
+  "fields": {
+    "product": 51,
+    "size_label": "120ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "14.00",
+    "reorder_level": "0.00",
+    "cost_price": "850.00",
+    "selling_price": "0.00",
+    "batch_number": "",
+    "expiry_date": "2029-12-31",
+    "created_at": "2026-08-21T16:36:08.752Z",
+    "updated_at": "2026-08-21T16:36:08.752Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 70,
+  "fields": {
+    "product": 52,
+    "size_label": "150ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "5.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1150.00",
+    "batch_number": "",
+    "expiry_date": "2029-02-28",
+    "created_at": "2026-08-21T16:37:06.105Z",
+    "updated_at": "2026-08-21T16:37:06.105Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 71,
+  "fields": {
+    "product": 53,
+    "size_label": "150ml",
+    "unit": "pcs",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1150.00",
+    "batch_number": "",
+    "expiry_date": "2029-02-28",
+    "created_at": "2026-08-21T16:37:38.459Z",
+    "updated_at": "2026-08-21T16:37:38.459Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 72,
+  "fields": {
+    "product": 54,
+    "size_label": "800g",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "10.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "1890.00",
+    "batch_number": "",
+    "expiry_date": "2027-06-30",
+    "created_at": "2026-08-21T16:39:51.329Z",
+    "updated_at": "2026-08-21T16:39:51.329Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 73,
+  "fields": {
+    "product": 54,
+    "size_label": "400g",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "20.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "990.00",
+    "batch_number": "",
+    "expiry_date": "2027-06-30",
+    "created_at": "2026-08-21T16:39:51.329Z",
+    "updated_at": "2026-08-21T16:39:51.329Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 74,
+  "fields": {
+    "product": 55,
+    "size_label": "1kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "10.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2290.00",
+    "batch_number": "",
+    "expiry_date": "2026-12-31",
+    "created_at": "2026-08-21T16:41:47.010Z",
+    "updated_at": "2026-08-21T16:41:47.010Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 75,
+  "fields": {
+    "product": 55,
+    "size_label": "1kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "5.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2290.00",
+    "batch_number": "",
+    "expiry_date": "2027-05-31",
+    "created_at": "2026-08-21T16:41:47.010Z",
+    "updated_at": "2026-08-21T16:41:47.010Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 76,
+  "fields": {
+    "product": 56,
+    "size_label": "36pc",
+    "unit": "box",
+    "sku": "",
+    "quantity_in_stock": "18.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2590.00",
+    "batch_number": "",
+    "expiry_date": "2027-02-28",
+    "created_at": "2026-08-21T16:43:32.393Z",
+    "updated_at": "2026-08-21T16:43:32.393Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 77,
+  "fields": {
+    "product": 57,
+    "size_label": "24pcs",
+    "unit": "box",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "3390.00",
+    "batch_number": "",
+    "expiry_date": "2027-04-30",
+    "created_at": "2026-08-21T16:45:22.180Z",
+    "updated_at": "2026-08-21T16:45:22.180Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 78,
+  "fields": {
+    "product": 58,
+    "size_label": "1kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "6.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2190.00",
+    "batch_number": "",
+    "expiry_date": "2027-02-28",
+    "created_at": "2026-08-21T16:46:22.777Z",
+    "updated_at": "2026-08-21T16:46:22.777Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 79,
+  "fields": {
+    "product": 59,
+    "size_label": "NA",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "11.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "450.00",
+    "batch_number": "",
+    "expiry_date": "2027-04-30",
+    "created_at": "2026-08-21T16:48:14.031Z",
+    "updated_at": "2026-08-21T16:48:14.031Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 80,
+  "fields": {
+    "product": 60,
+    "size_label": "NA",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "15.00",
+    "reorder_level": "0.00",
+    "cost_price": "450.00",
+    "selling_price": "0.00",
+    "batch_number": "",
+    "expiry_date": "2027-04-30",
+    "created_at": "2026-08-21T16:49:28.138Z",
+    "updated_at": "2026-08-21T16:49:28.138Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 81,
+  "fields": {
+    "product": 61,
+    "size_label": "NA",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "5.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "450.00",
+    "batch_number": "",
+    "expiry_date": "2027-04-30",
+    "created_at": "2026-08-21T16:50:43.107Z",
+    "updated_at": "2026-08-21T16:50:43.107Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 82,
+  "fields": {
+    "product": 62,
+    "size_label": "2.5kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "1.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "4200.00",
+    "batch_number": "",
+    "expiry_date": "2027-01-31",
+    "created_at": "2026-08-21T16:54:45.667Z",
+    "updated_at": "2026-08-21T16:54:45.667Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 83,
+  "fields": {
+    "product": 62,
+    "size_label": "2.5kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "4200.00",
+    "batch_number": "",
+    "expiry_date": "2027-02-28",
+    "created_at": "2026-08-21T16:54:45.667Z",
+    "updated_at": "2026-08-21T16:54:45.667Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 84,
+  "fields": {
+    "product": 62,
+    "size_label": "2.5kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "7.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "4200.00",
+    "batch_number": "",
+    "expiry_date": "2027-10-31",
+    "created_at": "2026-08-21T16:54:45.667Z",
+    "updated_at": "2026-08-21T16:54:45.667Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 85,
+  "fields": {
+    "product": 62,
+    "size_label": "2.5kg",
+    "unit": "box",
+    "sku": "",
+    "quantity_in_stock": "6.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "4400.00",
+    "batch_number": "",
+    "expiry_date": "2027-05-31",
+    "created_at": "2026-08-21T16:54:45.672Z",
+    "updated_at": "2026-08-21T16:54:45.672Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 86,
+  "fields": {
+    "product": 63,
+    "size_label": "1.8kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "44.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "3500.00",
+    "batch_number": "",
+    "expiry_date": null,
+    "created_at": "2026-08-21T16:55:45.545Z",
+    "updated_at": "2026-08-21T16:55:45.545Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 87,
+  "fields": {
+    "product": 64,
+    "size_label": "2.25kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "7.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "3800.00",
+    "batch_number": "",
+    "expiry_date": "2027-12-31",
+    "created_at": "2026-08-21T16:57:02.205Z",
+    "updated_at": "2026-08-21T16:57:02.205Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 88,
+  "fields": {
+    "product": 64,
+    "size_label": "2.25kg",
+    "unit": "pack",
+    "sku": "",
+    "quantity_in_stock": "5.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "3800.00",
+    "batch_number": "",
+    "expiry_date": "2027-10-31",
+    "created_at": "2026-08-21T16:57:02.207Z",
+    "updated_at": "2026-08-21T16:57:02.207Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 89,
+  "fields": {
+    "product": 65,
+    "size_label": "2kg",
+    "unit": "box",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2750.00",
+    "batch_number": "",
+    "expiry_date": "2027-06-30",
+    "created_at": "2026-08-21T16:59:43.381Z",
+    "updated_at": "2026-08-21T16:59:43.381Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 90,
+  "fields": {
+    "product": 66,
+    "size_label": "2kg",
+    "unit": "box",
+    "sku": "",
+    "quantity_in_stock": "4.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2750.00",
+    "batch_number": "",
+    "expiry_date": "2027-07-31",
+    "created_at": "2026-08-21T17:00:50.964Z",
+    "updated_at": "2026-08-21T17:00:50.964Z"
+  }
+},
+{
+  "model": "inventory.productvariant",
+  "pk": 91,
+  "fields": {
+    "product": 66,
+    "size_label": "2kg",
+    "unit": "box",
+    "sku": "",
+    "quantity_in_stock": "2.00",
+    "reorder_level": "0.00",
+    "cost_price": "0.00",
+    "selling_price": "2750.00",
+    "batch_number": "",
+    "expiry_date": "2027-09-30",
+    "created_at": "2026-08-21T17:00:50.964Z",
+    "updated_at": "2026-08-21T17:00:50.964Z"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 1,
+  "fields": {
+    "variant": 2,
+    "movement_type": "out",
+    "quantity": "2.00",
+    "note": "",
+    "created_at": "2026-08-21T09:42:28.399Z"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 2,
+  "fields": {
+    "variant": 1,
+    "movement_type": "in",
+    "quantity": "2.00",
+    "note": "",
+    "created_at": "2026-08-21T09:44:22.878Z"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 3,
+  "fields": {
+    "variant": 1,
+    "movement_type": "out",
+    "quantity": "2.00",
+    "note": "",
+    "created_at": "2026-08-21T15:00:05.713Z"
+  }
+},
+{
+  "model": "inventory.stockmovement",
+  "pk": 4,
+  "fields": {
+    "variant": 2,
+    "movement_type": "in",
+    "quantity": "2.00",
+    "note": "",
+    "created_at": "2026-08-21T15:00:19.084Z"
+  }
+}
+]
