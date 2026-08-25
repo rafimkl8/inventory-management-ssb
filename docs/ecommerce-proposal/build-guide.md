@@ -599,7 +599,17 @@ This server-to-server validation step is the most important security control in 
 Checks a customer's phone number against Bangladeshi courier delivery history (successful deliveries vs. cancellations/non-receipt) before a Cash on Delivery order is processed, using a BD-specific fraud-checking API.
 
 ## 3.1 Choosing a provider
-One available option: **FraudDetect** ([courierapi.chowdhury.bd](https://courierapi.chowdhury.bd/)) — aggregates Steadfast, Pathao, RedX, Paperfly, and Carrybee delivery history in one API call.
+
+Several small, independent Bangladeshi providers offer this kind of check. None of them are large, established platforms with a long public track record (unlike, say, a payment gateway) — they're niche developer tools, so this decision should be revisited periodically rather than treated as permanent.
+
+| Provider | Couriers covered | Pricing | Fit for this stack |
+|---|---|---|---|
+| **FraudDetect** ([courierapi.chowdhury.bd](https://courierapi.chowdhury.bd/)) | Steadfast, Pathao, RedX, Paperfly, Carrybee (5) | Free: 500 checks/mo · Pro: ৳999/mo for 10,000 checks | **Recommended — used below.** Plain REST API (`POST /api/v1/check`, JSON in/out), framework-agnostic, integrates cleanly with Django via `requests`. No WordPress/WooCommerce dependency, and pricing is transparent and verifiable. |
+| FraudChecker BD ([fraudchecker.link](https://fraudchecker.link/)) | Steadfast, Pathao, RedX, Paperfly (4) | ৳100–400/mo depending on daily search volume; developer API key included | Cheaper per-check, but the public site is entirely WordPress/WooCommerce-plugin-oriented with no visible developer API docs — a real integration-risk unknown for a custom Django/React build. Worth re-checking if their API documentation improves. |
+| BD Courier "Fraud Block" plugin ([plugins.bdcourier.com](https://plugins.bdcourier.com/)) | N/A | ৳499 one-time | Not actually comparable — this blocks IPs/duplicate orders locally inside WooCommerce, it doesn't check courier delivery history at all. Not applicable to this stack. |
+| FraudPeek ([fraudpeek.com](https://fraudpeek.com/)) | 3+ couriers | 50 free lookups/day; a "Developer API" is mentioned but has no public pricing page | Pricing opacity beyond the free tier makes it unsuitable to commit to for a costed estimate. |
+
+**Recommendation: use FraudDetect (courierapi.chowdhury.bd).** It covers the most couriers (5, including Carrybee which the others miss), has the only genuinely documented, stack-agnostic REST API of the options above, and transparent pricing you can actually stand behind in a client estimate.
 
 | Plan | Monthly checks | Price |
 |---|---|---|
@@ -607,7 +617,9 @@ One available option: **FraudDetect** ([courierapi.chowdhury.bd](https://courier
 | Pro | 10,000/month | ৳999/month |
 | Enterprise | Unlimited | Custom |
 
-At current order volume, the Free tier is sufficient. Re-evaluate only if order volume grows well beyond ~15/day sustained.
+At current order volume, the Free tier is sufficient (roughly 150 checks/month at 4-5 orders/day). Re-evaluate only if order volume grows well beyond ~15/day sustained.
+
+**Design for provider swap-ability:** since these are all small, unverified providers, keep the integration behind the single `check_fraud_risk()` function shown below rather than calling the provider's API directly from multiple places. If FraudDetect's reliability or pricing changes, or a stronger competitor emerges (e.g. better docs from FraudChecker BD), swapping providers becomes a one-function change instead of a rewrite.
 
 ## 3.2 Backend integration
 ```python

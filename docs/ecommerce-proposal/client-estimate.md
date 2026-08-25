@@ -119,7 +119,7 @@ These are paid directly by you to the service providers — they are separate fr
 
 | Add-on | Estimated Price |
 |---|---|
-| **Fraud-order detection** — automatically checks a customer's phone number against Bangladeshi courier delivery history (cancellations, failed deliveries, non-receipt) before you process a Cash on Delivery order, so risky orders can be flagged for extra confirmation | **৳5,000 one-time** integration fee. The checking service itself is free at your order volume (see Section 6); no ongoing cost unless you scale well beyond current volume |
+| **Fraud-order detection** — automatically checks a customer's phone number against Bangladeshi courier delivery history (cancellations, failed deliveries, non-receipt) across **Steadfast, Pathao, RedX, Paperfly, and Carrybee** before you process a Cash on Delivery order, so risky orders can be flagged for extra confirmation | **৳5,000 one-time** integration fee. The checking service itself is free at your order volume (see Section 6); no ongoing cost unless you scale well beyond current volume |
 | Monthly maintenance & support retainer (updates, fixes, new feature requests) | ৳1,500 – ৳3,000 / month |
 | Managing domain/hosting renewals on your behalf | Small service fee, agreed separately |
 | Product photography cleanup / re-shoots | Quoted separately, not a development service |
@@ -134,7 +134,7 @@ These are paid directly by you to the service providers — they are separate fr
 3. The WhatsApp/phone number order notifications should be sent to.
 4. Product photos to use (or confirmation to proceed with what's already in the inventory system).
 5. Preferred domain name, if not already purchased.
-6. Whether you'd like the fraud-order detection add-on included from launch, or added later.
+6. Whether you'd like the fraud-order detection add-on included from launch, or added later (covers delivery history across **Steadfast, Pathao, RedX, Paperfly, and Carrybee**).
 
 ---
 
